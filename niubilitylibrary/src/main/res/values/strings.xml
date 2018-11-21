@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NiubilityLibrary</string>
+
+    <string name="text_contentDescription_image">imageView</string>
+
+    <string name="text_login_vip">会员登录</string>
+    <string name="tip_require_code_vip">请将会员码放至扫描区前</string>
+    <string name="text_time_count_down">（120s）</string>
+</resources>
