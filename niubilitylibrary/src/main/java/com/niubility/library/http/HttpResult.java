@@ -10,6 +10,10 @@ public class HttpResult<T> implements Serializable {
     private T result;
 
 
+    public boolean isSuccessful() {
+        return err_code == 200;
+    }
+
     public int getErr_code() {
         return err_code;
     }
