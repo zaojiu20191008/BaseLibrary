@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 import com.niubility.library.R;
 
 
-public class RequireCodeDialog extends Dialog implements View.OnClickListener, DialogInterface.OnCancelListener {
+public class CDTipDialog extends Dialog implements View.OnClickListener, DialogInterface.OnCancelListener {
 
     private Context context;
     private OnScanCodeListener scanCodeListener;
@@ -34,26 +35,29 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
 
     private String titleText;
     private String contentText;
-    private boolean isShowImage = false;
+    private boolean isShowImage = true;
+
+
+    private int cdDuration = 30;
 
     private CountDownTimer countDownTimer;
 
-    public RequireCodeDialog(@NonNull Context context) {
+    public CDTipDialog(@NonNull Context context) {
         super(context, R.style.CustomDialogStyle);
         this.context = context;
     }
 
-    public RequireCodeDialog(@NonNull Context context, int themeResId) {
+    public CDTipDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
         this.context = context;
     }
 
-    protected RequireCodeDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected CDTipDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
         this.context = context;
     }
 
-    public RequireCodeDialog(@NonNull Context context, @NonNull OnScanCodeListener scanCodeListener) {
+    public CDTipDialog(@NonNull Context context, @NonNull OnScanCodeListener scanCodeListener) {
         super(context, R.style.CustomDialogStyle);
         this.context = context;
         this.scanCodeListener = scanCodeListener;
@@ -66,7 +70,7 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
         Window window = getWindow();
         window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置为居中
 //        window.setWindowAnimations(R.style.bottom_menu_animation); // 添加动画效果
-        setContentView(R.layout.layout_dialog_require_code);
+        setContentView(R.layout.layout_dialog_tip_cd);
 
         /*WindowManager windowManager = ((Activity) context).getWindowManager();
         Display display = windowManager.getDefaultDisplay();
@@ -88,24 +92,25 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
         titleView = (TextView) findViewById(R.id.textview_titile);
         contentView = (TextView) findViewById(R.id.textview_content);
         textView_time = (TextView) findViewById(R.id.textView_cdTime);
-        editText_barcode = findViewById(R.id.editText_barcode);
+        //editText_barcode = findViewById(R.id.editText_barcode);
 
-        /*if (isShowImage) {
+        if (isShowImage) {
             imageView.setVisibility(View.VISIBLE);
         }
         if (!TextUtils.isEmpty(titleText)) {
             titleView.setText(titleText);
+            contentView.setVisibility(View.VISIBLE);
         }
         if (!TextUtils.isEmpty(contentText)) {
             contentView.setText(contentText);
             contentView.setVisibility(View.VISIBLE);
-        }*/
+        }
 
         imageView_close.setOnClickListener(this);
 
         setOnCancelListener(this);
 
-        countDownTimer = new CountDownTimer(120*1000, 1000) {
+        countDownTimer = new CountDownTimer(1000 * cdDuration, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -171,7 +176,7 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
             }
         });*/
 
-        editText_barcode.setOnKeyListener(new View.OnKeyListener() {
+        /*editText_barcode.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
@@ -179,12 +184,12 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
                     //拿到条码值，进行后续处理
 
                     if (isScanCode && scanCodeListener != null) {
-                        scanCodeListener.onScanCode(RequireCodeDialog.this, editText_barcode.getText().toString().trim());
+                        scanCodeListener.onScanCode(CDTipDialog.this, editText_barcode.getText().toString().trim());
                     }
                     editText_barcode.setText("");
 
-                    /*Toast.makeText(context, "拿到的条码值为：" + editText_barcode.getText().toString().trim(), Toast.LENGTH_LONG).show();
-                    editText_barcode.setText("");*/
+                    *//*Toast.makeText(context, "拿到的条码值为：" + editText_barcode.getText().toString().trim(), Toast.LENGTH_LONG).show();
+                    editText_barcode.setText("");*//*
                 }
 
                 return false;
@@ -194,7 +199,7 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
         //editText_barcode.setTextIsSelectable(true);
         editText_barcode.setFocusable(true);
         editText_barcode.setFocusableInTouchMode(true);
-        editText_barcode.requestFocus();
+        editText_barcode.requestFocus();*/
 
         /*InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editText_barcode,InputMethodManager.SHOW_IMPLICIT);*/
@@ -249,6 +254,7 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
         isScanCode = scanCode;
     }
 
+
     /*@Override
     public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
 
@@ -271,6 +277,6 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
          *
          * @param codeValue
          */
-        void onScanCode(RequireCodeDialog currentDialog, String codeValue);
+        void onScanCode(CDTipDialog currentDialog, String codeValue);
     }
 }

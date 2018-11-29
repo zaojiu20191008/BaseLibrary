@@ -24,11 +24,15 @@ public class WxLoadingDialog extends Dialog {
     private int mDotSeq;
 
     private TextView loading_brand;
+    private ImageView icon_loading;
     private String text_loading;
+    private int id_drawable_loading;
 
     public WxLoadingDialog(Context context) {
         super(context, R.style.Loading);
         this.setContentView(R.layout.layout_dialog_loading);
+        //this.setContentView(R.layout.layout_dialog_loading_custom);
+        //this.setContentView(R.layout.layout_dialog_loading_custom2);
         Window window = this.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.gravity = 17;
@@ -39,6 +43,7 @@ public class WxLoadingDialog extends Dialog {
         this.mHandler = new MHandler(WxLoadingDialog.this);
 
         loading_brand = findViewById(R.id.loading_brand);
+        icon_loading = findViewById(R.id.loading_icon);
     }
 
 
@@ -101,6 +106,9 @@ public class WxLoadingDialog extends Dialog {
         if (!TextUtils.isEmpty(text_loading)){
             loading_brand.setText(text_loading);
         }
+        if (id_drawable_loading != 0) {
+            icon_loading.setBackgroundResource(id_drawable_loading);
+        }
 
         this.mHandler.sendEmptyMessageDelayed(1, 800L);
         this.mDotSeq = 0;
@@ -116,4 +124,7 @@ public class WxLoadingDialog extends Dialog {
         super.dismiss();
     }
 
+    public void setId_drawable_loading(int id_drawable_loading) {
+        this.id_drawable_loading = id_drawable_loading;
+    }
 }

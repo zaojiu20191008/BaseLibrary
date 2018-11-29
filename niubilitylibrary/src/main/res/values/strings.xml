@@ -6,4 +6,12 @@
     <string name="text_login_vip">会员登录</string>
     <string name="tip_require_code_vip">请将会员码放至扫描区前</string>
     <string name="text_time_count_down">（120s）</string>
+
+    <string name="text_tip_title">提示标题</string>
+    <string name="text_tip_content">提示内容</string>
+
+    <string name="text_sure">确定</string>
+    <string name="text_cancel">取消</string>
+
+    <string name="text_content_input">输入内容</string>
 </resources>
