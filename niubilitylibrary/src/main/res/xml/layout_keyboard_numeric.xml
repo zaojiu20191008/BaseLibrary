@@ -38,8 +38,7 @@
                 android:keyLabel="6"
                 android:horizontalGap="@dimen/x16"/>
         <Key
-                android:codes="-4"
-                android:keyLabel="@string/text_sure"
+                android:codes="-21"
                 android:horizontalGap="@dimen/x16"
                 android:keyHeight="380px"
                 android:keyWidth="@dimen/x116"/>
@@ -60,8 +59,7 @@
     </Row>
     <Row>
         <Key
-                android:codes="48"
-                android:keyLabel="00"
+                android:codes="-20"
                 android:keyOutputText="00"
                 android:keyEdgeFlags="left"/>
         <Key

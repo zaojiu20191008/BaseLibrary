@@ -1,6 +1,7 @@
 package com.niubility.library.widget.keyboard;
 
 import android.content.Context;
+import android.graphics.*;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
@@ -10,7 +11,13 @@ import android.view.View;
 import android.widget.EditText;
 import com.niubility.library.R;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
 public class NumericKeyboard extends KeyboardView {
+
+    private static final int CODE_DOUBLE_ZERO = -20; //双零按钮
+    private static final int CODE_SURE = -21; //确定按钮
 
     private NumericKeyboard myselfView = this;
 
@@ -96,6 +103,14 @@ public class NumericKeyboard extends KeyboardView {
                 case Keyboard.KEYCODE_CANCEL:
                     myselfView.setVisibility(View.GONE);
                     break;
+                case CODE_DOUBLE_ZERO:
+                    editable.append("00");
+                    break;
+                case CODE_SURE:
+                    if (onClickSureKeyListener != null) {
+                        onClickSureKeyListener.onClickSureKey(editText);
+                    }
+                    break;
                 default:
                     editable.insert(start, Character.toString((char) primaryCode));
                     break;
@@ -144,5 +159,161 @@ public class NumericKeyboard extends KeyboardView {
 
         }
     };
+
+
+    @Override
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        List<Keyboard.Key> keys = null;
+        if (keyboardXml != null) {
+            keys = keyboardXml.getKeys();
+        }
+
+        if (keys != null) {
+            for (Keyboard.Key key : keys) {
+                // 数字键盘的处理
+                if (key.codes[0] == -20) {
+                    //drawKeyBackground(R.drawable.bg_keyboardview_yes, canvas, key);
+                    //drawText(canvas, key);
+                    drawText(canvas, key, "00");
+                }
+                if (key.codes[0] == -4) {
+                    drawSureText(canvas, key);
+                }
+            }
+        }
+    }
+
+    private void drawText(Canvas canvas, Keyboard.Key key, String showStr) {
+        Rect bounds = new Rect();
+        Paint paint = new Paint();
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLACK);
+
+        Field field;
+        int labelTextSize = 0;
+        try {
+            field = KeyboardView.class.getDeclaredField("mLabelTextSize");
+            field.setAccessible(true);
+            labelTextSize = (int) field.get(this);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        paint.setTextSize(labelTextSize);
+        //paint.setTypeface(Typeface.DEFAULT_BOLD);
+        paint.setTypeface(Typeface.DEFAULT);
+
+        paint.getTextBounds(showStr, 0, showStr.length(), bounds);
+        canvas.drawText(showStr, key.x + (key.width / 2) + 16,
+                (key.y + key.height / 2) + bounds.height() / 2 + 16, paint);
+
+    }
+
+    private void drawSureText(Canvas canvas, Keyboard.Key key) {
+        Rect bounds = new Rect();
+        Paint paint = new Paint();
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLACK);
+
+        String showStrFirst = "确";
+        String showStrSecond = "定";
+        Field field;
+        int labelTextSize = 0;
+        try {
+            field = KeyboardView.class.getDeclaredField("mLabelTextSize");
+            field.setAccessible(true);
+            labelTextSize = (int) field.get(this);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        paint.setTextSize(labelTextSize);
+        //paint.setTypeface(Typeface.DEFAULT_BOLD);
+        paint.setTypeface(Typeface.DEFAULT);
+
+        paint.getTextBounds(showStrFirst, 0, showStrFirst.length(), bounds);
+        canvas.drawText(showStrFirst, key.x + (key.width / 2) + 16,
+                (key.y + key.height / 2) + bounds.height() / 2 + 16 - 29, paint);
+
+        paint.getTextBounds(showStrSecond, 0, showStrSecond.length(), bounds);
+        canvas.drawText(showStrSecond, key.x + (key.width / 2) + 16,
+                (key.y + key.height / 2) + bounds.height() / 2 + 16 + 29, paint);
+
+    }
+
+
+    private void drawText(Canvas canvas, Keyboard.Key key) {
+        Rect bounds = new Rect();
+        Paint paint = new Paint();
+        paint.setTextAlign(Paint.Align.CENTER);
+
+
+        paint.setAntiAlias(true);
+
+        paint.setColor(Color.WHITE);
+        if (key.label != null) {
+            String label = key.label.toString();
+
+            Field field;
+
+            if (label.length() > 1 && key.codes.length < 2) {
+                int labelTextSize = 0;
+                try {
+                    field = KeyboardView.class.getDeclaredField("mLabelTextSize");
+                    field.setAccessible(true);
+                    labelTextSize = (int) field.get(this);
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                paint.setTextSize(labelTextSize);
+                //paint.setTypeface(Typeface.DEFAULT_BOLD);
+                paint.setTypeface(Typeface.DEFAULT);
+            } else {
+                int keyTextSize = 0;
+                try {
+                    field = KeyboardView.class.getDeclaredField("mLabelTextSize");
+                    field.setAccessible(true);
+                    keyTextSize = (int) field.get(this);
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                paint.setTextSize(keyTextSize);
+                paint.setTypeface(Typeface.DEFAULT);
+            }
+
+            paint.getTextBounds(key.label.toString(), 0, key.label.toString()
+                    .length(), bounds);
+            canvas.drawText(key.label.toString(), key.x + (key.width / 2),
+                    (key.y + key.height / 2) + bounds.height() / 2, paint);
+        } else if (key.icon != null) {
+            key.icon.setBounds(key.x + (key.width - key.icon.getIntrinsicWidth()) / 2, key.y + (key.height - key.icon.getIntrinsicHeight()) / 2,
+                    key.x + (key.width - key.icon.getIntrinsicWidth()) / 2 + key.icon.getIntrinsicWidth(), key.y + (key.height - key.icon.getIntrinsicHeight()) / 2 + key.icon.getIntrinsicHeight());
+            key.icon.draw(canvas);
+        }
+
+    }
+
+
+    private OnClickSureKeyListener onClickSureKeyListener;
+
+    public void setOnClickSureKeyListener(OnClickSureKeyListener onClickSureKeyListener) {
+        this.onClickSureKeyListener = onClickSureKeyListener;
+    }
+
+    public interface OnClickSureKeyListener {
+        void onClickSureKey (EditText editText);
+    }
+
+
 
 }
