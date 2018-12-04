@@ -14,7 +14,7 @@ public class BaseContract {
 
     }
 
-    public abstract class Presenter extends BasePresenter<IModel, IView> {
+    public interface Presenter {
 
     }
 

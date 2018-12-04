@@ -17,7 +17,7 @@ public class API {
     private String DEFAULT_API_URL;
     private HttpService mHttpService;
 
-    private API() {
+    public API() {
         DEFAULT_API_URL = getApiUrl();
     }
 
@@ -40,7 +40,7 @@ public class API {
     /**
      * 默认配置
      */
-    private HttpConfig mDefaultHttpConfig = new HttpConfig() {
+    protected HttpConfig mDefaultHttpConfig = new HttpConfig() {
         @Override
         public String configBaseUrl() {
             return DEFAULT_API_URL;
