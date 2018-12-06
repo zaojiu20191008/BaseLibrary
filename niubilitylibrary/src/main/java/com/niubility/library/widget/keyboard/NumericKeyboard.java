@@ -173,12 +173,12 @@ public class NumericKeyboard extends KeyboardView {
         if (keys != null) {
             for (Keyboard.Key key : keys) {
                 // 数字键盘的处理
-                if (key.codes[0] == -20) {
+                if (key.codes[0] == CODE_DOUBLE_ZERO) {
                     //drawKeyBackground(R.drawable.bg_keyboardview_yes, canvas, key);
                     //drawText(canvas, key);
                     drawText(canvas, key, "00");
                 }
-                if (key.codes[0] == -4) {
+                if (key.codes[0] == CODE_SURE) {
                     drawSureText(canvas, key);
                 }
             }

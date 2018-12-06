@@ -40,7 +40,7 @@
             android:codes="-21"
             android:horizontalGap="@dimen/x16"
             android:keyWidth="@dimen/x116"
-            android:keyHeight="380px" />
+            android:keyHeight="@dimen/y380" />
     </Row>
     <Row>
         <Key

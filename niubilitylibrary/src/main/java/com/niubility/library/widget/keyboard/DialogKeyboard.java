@@ -178,10 +178,10 @@ public class DialogKeyboard extends KeyboardView {
         if (keys != null) {
             for (Keyboard.Key key : keys) {
                 // 数字键盘的处理
-                if (key.codes[0] == -20) {
+                if (key.codes[0] == CODE_DOUBLE_ZERO) {
                     drawText(canvas, key, "00");
                 }
-                if (key.codes[0] == -21) {
+                if (key.codes[0] == CODE_SURE) {
                     drawSureText(canvas, key);
                 }
             }
