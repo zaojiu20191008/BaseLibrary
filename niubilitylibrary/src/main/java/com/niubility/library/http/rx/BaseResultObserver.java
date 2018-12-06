@@ -1,4 +1,6 @@
-package com.niubility.library.http;
+package com.niubility.library.http.rx;
+
+import com.niubility.library.http.HttpExceptionEngine;
 
 import java.util.Map;
 
@@ -17,7 +19,7 @@ public abstract class BaseResultObserver<T> extends DisposableObserver<T> {
 //        onFailure(apiException.getErr_msg());
 
 
-        Map map = HttpExceptionEngine.handleExceptionToMap(e);
+        Map<String, Object> map = HttpExceptionEngine.handleExceptionToMap(e);
         onFailure(map);
 
     }
@@ -29,7 +31,7 @@ public abstract class BaseResultObserver<T> extends DisposableObserver<T> {
 
     protected abstract void onSuccess(T result);
 //    protected abstract void onFailure(String msg);
-    protected abstract void onFailure(Map map);
+    protected abstract void onFailure(Map<String, Object> map);
 
 
 }

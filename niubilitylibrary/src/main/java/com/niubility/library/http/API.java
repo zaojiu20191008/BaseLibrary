@@ -1,66 +1,47 @@
 package com.niubility.library.http;
 
-import okhttp3.OkHttpClient;
 
+import com.niubility.library.mvp.BaseRxView;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import org.reactivestreams.Subscriber;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 默认模板，统一管理多个Service接口(e.g. HttpService1、 HttpService2）
  * <p>
- * 子类必须重写getApiUrl() 以正确配置Retrofit
+ * 根据此模板 编写api接口的获取逻辑
  * <p>
- * 基础库中 HttpService为空实现， getHttpService()提供参考，根据项目需求具体编写逻辑
  * <p>
- * 调用方式e.g.  API.getInstance.getHttpService()
+ * 调用方式e.g.  (API).getInstance.httpService()
  */
 public class API {
 
-    private String DEFAULT_API_URL;
-    private HttpService mHttpService;
 
-    public API() {
-        DEFAULT_API_URL = getApiUrl();
-    }
-
-    /**
-     * @return 默认的BaseUrl地址
-     */
-    protected String getApiUrl() {
-        return "";
-    }
-
-
-    public static API getInstance() {
-        return Holder.sInstance;
-    }
-
-    private static class Holder {
-        private static API sInstance = new API();
-    }
-
-    /**
-     * 默认配置
-     */
-    protected HttpConfig mDefaultHttpConfig = new HttpConfig() {
-        @Override
-        public String configBaseUrl() {
-            return DEFAULT_API_URL;
-        }
-
-        @Override
-        public OkHttpClient configClient() {
-            return HttpClient.getInstance().getOkHttpClient();
-        }
-
-    };
-
-    public HttpService getHttpService() {
-        if(mHttpService == null) {
-            mHttpService = BaseRetrofit.getInstance()
-                    .getRetrofit(mDefaultHttpConfig)
-                    .create(HttpService.class);
-        }
-        return mHttpService;
-    }
+//    private HttpService httpService;
+//
+//    public HttpService httpService() {
+//        if(httpService == null) {
+//            httpService = BaseRetrofit.getInstance()
+//                    .getRetrofit(BuildConfig.API_URL)
+//                    .create(HttpService.class);
+//        }
+//        return httpService;
+//    }
+//
+//
+//
+//    public static HttpAPI getInstance() {
+//        return Holder.sInstance;
+//    }
+//
+//    private static class Holder {
+//        private static HttpAPI sInstance = new HttpAPI();
+//    }
 
 
 }

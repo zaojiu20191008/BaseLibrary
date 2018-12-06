@@ -1,15 +1,19 @@
-package com.niubility.library.http;
+package com.niubility.library.http.base;
 
 import android.util.Log;
 
+import com.niubility.library.utils.TransCodeUtils;
+
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 
+/**
+ * 单例， Okhttp网络请求客户端
+ */
 public class HttpClient {
 
     private final static String TAG = "HttpClient";
@@ -36,7 +40,7 @@ public class HttpClient {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger(){
             @Override
             public void log(String message) {
-                Log.i(TAG, "log: " + message);
+                Log.i(TAG, "log: " + TransCodeUtils.decodeUnicode(message));
             }
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -69,6 +73,10 @@ public class HttpClient {
 
     public OkHttpClient getOkHttpClient() {
         return mOkHttpClient;
+    }
+
+    public RequestBody createRequestBody(String json) {
+        return RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
     }
 
 

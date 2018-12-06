@@ -1,6 +1,7 @@
 package com.niubility.library.http;
 
 import android.net.ParseException;
+import android.util.Log;
 
 import com.google.gson.JsonParseException;
 
@@ -15,7 +16,12 @@ import java.util.Map;
 
 import retrofit2.HttpException;
 
+/**
+ * 网络错误处理引擎
+ */
 public class HttpExceptionEngine {
+
+    public static final String TAG = "HttpExceptionEngine";
 
     public static class Error {
         //错误类型
@@ -27,6 +33,10 @@ public class HttpExceptionEngine {
         //错误类型
 
     }
+
+    public static final String ErrorCode = "ErrorCode";
+    public static final String ErrorType = "ErrorType";
+    public static final String ErrorMsg = "ErrorMsg";
 
     public static ApiException handleException(Throwable e) {
         int err_type = Error.UNKNOWN;
@@ -69,7 +79,7 @@ public class HttpExceptionEngine {
         return new ApiException(err_type, err_msg);
     }
 
-    public static Map handleExceptionToMap(Throwable e) {
+    public static Map<String, Object> handleExceptionToMap(Throwable e) {
 
         int err_type = Error.UNKNOWN;
         int err_code = Error.UNKNOWN;
@@ -104,9 +114,15 @@ public class HttpExceptionEngine {
         }
 
         HashMap<String, Object> result = new HashMap<>();
-        result.put("ErrorType", err_type);
-        result.put("ErrorCode", err_code);
-        result.put("ErrorMsg", err_msg);
+        result.put(ErrorType, err_type);
+        result.put(ErrorCode, err_code);
+        result.put(ErrorMsg, err_msg);
+
+        String sb = "handleExceptionToMap: --> " +
+                ErrorType + ":" + err_type +
+                ", " + ErrorCode + ":" + err_code +
+                ", " + ErrorMsg + ":" + err_msg;
+        Log.i(TAG, sb);
 
         return result;
     }

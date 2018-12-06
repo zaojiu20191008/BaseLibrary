@@ -1,5 +1,8 @@
 package com.niubility.library.http;
 
+/**
+ * 服务器正常返回，但err_code != 200的情况下 抛出此异常
+ */
 public class ApiException extends RuntimeException {
 
     private int err_code;

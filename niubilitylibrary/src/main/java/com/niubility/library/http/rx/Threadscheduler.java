@@ -1,4 +1,4 @@
-package com.niubility.library.http;
+package com.niubility.library.http.rx;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;

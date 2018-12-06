@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+/**
+ * 单例，返回SharedPreference
+ */
 public class SharedPreferencesUtils {
 
     private static final String TAG = "SharedPreferencesUtils";

@@ -6,9 +6,9 @@ package com.niubility.library.mvp;
  */
 public class BaseContract {
 
-    public interface IModel extends BaseModel {
-
-    }
+//    public interface IModel extends BaseModel {
+//
+//    }
 
     public interface IView extends BaseView {
 

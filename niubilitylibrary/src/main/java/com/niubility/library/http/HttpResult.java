@@ -2,6 +2,9 @@ package com.niubility.library.http;
 
 import java.io.Serializable;
 
+/**
+ * 服务器通用返回格式
+ */
 public class HttpResult<T> implements Serializable {
 
     private int err_code;
