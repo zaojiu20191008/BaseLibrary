@@ -86,7 +86,7 @@ public class NumericKeyboard extends KeyboardView {
          */
         @Override
         public void onKey(int primaryCode, int[] keyCodes) {
-            if (editText == null) {
+            if (editText == null || !editText.isEnabled()) {
                 return;
             }
 
