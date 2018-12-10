@@ -1,4 +1,4 @@
-package com.niubility.library.http;
+package com.niubility.library.http.exception;
 
 /**
  * 服务器正常返回，但err_code != 200的情况下 抛出此异常

@@ -1,14 +1,16 @@
 package com.niubility.library.http.rx;
 
-import com.niubility.library.http.ApiException;
-import com.niubility.library.http.HttpExceptionEngine;
-import com.niubility.library.http.HttpResult;
+import com.niubility.library.http.base.HttpResult;
+import com.niubility.library.http.exception.ApiException;
+import com.niubility.library.http.exception.HttpExceptionEngine;
 
 import java.util.Map;
 
-import io.reactivex.observers.DisposableObserver;
-
-public abstract class BaseObserver<T> extends DisposableObserver<HttpResult<T>> {
+/**
+ * 通用处理HttpResult逻辑
+ * @param <T>
+ */
+public abstract class BaseObserver<T> extends BaseErrorObserver<HttpResult<T>> {
 
     @Override
     public void onNext(HttpResult<T> httpResult) {

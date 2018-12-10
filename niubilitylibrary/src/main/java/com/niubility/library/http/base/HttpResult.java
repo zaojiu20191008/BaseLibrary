@@ -1,4 +1,4 @@
-package com.niubility.library.http;
+package com.niubility.library.http.base;
 
 import java.io.Serializable;
 

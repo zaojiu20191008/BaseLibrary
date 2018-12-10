@@ -9,10 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.niubility.library.mvp.BasePresenter;
-import com.niubility.library.mvp.BaseRxView;
-import com.niubility.library.utils.ToastUtils;
-import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.niubility.library.mvp.BaseView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -20,7 +17,7 @@ import butterknife.Unbinder;
 /**
  * MVP模式，绑定生命周期，防止内存泄漏，基类
  */
-public abstract class BaseRxFragment<V extends BaseRxView, P extends BasePresenter<V>> extends RxFragment implements BaseRxView {
+public abstract class BaseMvpFragment<V extends BaseView, P extends BasePresenter<V>> extends BaseFragment {
 
     protected P mPresenter;
     protected V mView;
@@ -46,8 +43,11 @@ public abstract class BaseRxFragment<V extends BaseRxView, P extends BasePresent
         if(mView == null)
             mView = createView();
 
-        if(mPresenter != null && mView != null)
+        if(mPresenter != null && mView != null) {
             mPresenter.attach(mView);
+            //添加生命周期观察者
+            getLifecycle().addObserver(mPresenter);
+        }
 
         init();
     }
@@ -57,26 +57,6 @@ public abstract class BaseRxFragment<V extends BaseRxView, P extends BasePresent
     protected abstract int getLayoutId();
     protected abstract void init();
 
-
-    @Override
-    public void showToast(String msg) {
-        ToastUtils.showToast(getActivity(), msg);
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public <T> LifecycleTransformer<T> bindLifecycle() {
-        return bindToLifecycle();
-    }
 
     @Override
     public void onDestroy() {

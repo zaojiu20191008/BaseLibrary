@@ -1,7 +1,7 @@
 package com.niubility.library.http.rx;
 
-import com.niubility.library.http.ApiException;
-import com.niubility.library.http.HttpResult;
+import com.niubility.library.http.exception.ApiException;
+import com.niubility.library.http.base.HttpResult;
 
 import io.reactivex.functions.Function;
 

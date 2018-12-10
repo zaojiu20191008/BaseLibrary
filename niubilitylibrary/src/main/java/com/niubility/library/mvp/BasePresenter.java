@@ -1,15 +1,22 @@
 package com.niubility.library.mvp;
 
 
-import com.niubility.library.http.HttpResult;
-import com.niubility.library.http.rx.RxSchedulers;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
+import android.util.Log;
+
+import com.niubility.library.http.base.HttpResult;
 import com.niubility.library.http.rx.Threadscheduler;
 import com.niubility.library.http.rx.TransformToResult;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
 
-public abstract class BasePresenter<V extends BaseRxView> {
+public abstract class BasePresenter<V extends BaseView> implements LifecycleObserver {
+
+    private static final String TAG = "BasePresenter";
 
     protected V mView;
 
@@ -21,20 +28,42 @@ public abstract class BasePresenter<V extends BaseRxView> {
         this.mView = null;
     }
 
-    public <T> void subscribeBindLifecycle(Observable<HttpResult<T>> observable, Observer<T> observer) {
-        observable.compose(RxSchedulers.<HttpResult<T>>observableIO2Main(mView))//绑定生命周期，防止内存泄露
-                .map(new TransformToResult<T>())
-                .subscribe(observer);
-
-    }
+    /**
+     * 收集订阅的observer，页面销毁时统一进行停止订阅操作
+     */
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
 
-    public <T> void subscribeAsyn(Observable<HttpResult<T>> observable, Observer<T> observer) {
-
+    /**
+     * 订阅，并将HttpResult中关键数据剥离出来
+     */
+    public <T> void subscribeAsyncToResult(Observable<HttpResult<T>> observable, DisposableObserver<T> observer) {
         observable.compose(new Threadscheduler<HttpResult<T>>())
                 .map(new TransformToResult<T>())
                 .subscribe(observer);
+
+        mCompositeDisposable.add(observer);
     }
+
+    /**
+     * 订阅
+     */
+    public <T> void subscribeAsync(Observable<T> observable, DisposableObserver<T> observer) {
+        observable.compose(new Threadscheduler<T>())
+                .subscribe(observer);
+
+        mCompositeDisposable.add(observer);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy() {
+        Log.i(TAG, "onDestroy: ");
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
+        detach();
+    }
+
 
 
 }
