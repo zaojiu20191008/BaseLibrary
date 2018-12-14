@@ -24,6 +24,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        dev.initWith(buildTypes.debug)
+        dev {
+
+        }
     }
     externalNativeBuild {
         cmake {

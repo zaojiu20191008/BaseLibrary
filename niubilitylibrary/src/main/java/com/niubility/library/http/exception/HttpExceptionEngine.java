@@ -38,6 +38,17 @@ public class HttpExceptionEngine {
     public static final String ErrorType = "ErrorType";
     public static final String ErrorMsg = "ErrorMsg";
 
+    public static boolean isBussinessError(int errorType) {
+        return Error.BUSSINESS == errorType;
+    }
+    /**
+     * 是否是业务错误 (后台正常返回，但error != 200)
+     */
+    public static boolean isBussinessError(Map<String, Object> map) {
+        int errorType = (int) map.get(HttpExceptionEngine.ErrorType);
+        return isBussinessError(errorType);
+    }
+
     public static ApiException handleException(Throwable e) {
         int err_type = Error.UNKNOWN;
         int err_code = Error.UNKNOWN;

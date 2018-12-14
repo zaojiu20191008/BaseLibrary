@@ -12,13 +12,13 @@ public class TransformToResult<T> implements Function<HttpResult<T>, T> {
 
     @Override
     public T apply(HttpResult<T> httpResult) throws Exception {
-        T result = httpResult.getResult();
-        if(result == null) {
-            throw new ApiException(0, "服务器返回格式与预定义解析格式不一样");
-        }
+//        T result = httpResult.getResult();
+//        if(result == null) {
+//            throw new ApiException(0, "服务器返回格式与预定义解析格式不一样");
+//        }
         if(!httpResult.isSuccessful()) {
             throw new ApiException(httpResult.getErr_code(), httpResult.getErr_msg());
         }
-        return result;
+        return httpResult.getResult();
     }
 }

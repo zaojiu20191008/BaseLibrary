@@ -15,7 +15,7 @@ public class SharedPreferencesUtils {
     public static final String PREFERENCE_NAME = "Config";
     private SharedPreferences mSharedPreference;
 
-    public SharedPreferencesUtils getInstance() {
+    public static SharedPreferencesUtils getInstance() {
         return Holder.sInstance;
     }
 
@@ -26,7 +26,7 @@ public class SharedPreferencesUtils {
     }
 
 
-    private SharedPreferences getSharedPreferences(Context context) {
+    public SharedPreferences getSharedPreferences(Context context) {
         if(mSharedPreference == null)
 //            mSharedPreference = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
             mSharedPreference = PreferenceManager.getDefaultSharedPreferences(context);

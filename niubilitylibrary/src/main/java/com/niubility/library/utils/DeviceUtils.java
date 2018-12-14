@@ -17,7 +17,7 @@ public class DeviceUtils {
      *
      * @return MAC地址(mMacAddress)
      */
-    private static String getMacAddress() {
+    public static String getMacAddress() {
         if (TextUtils.isEmpty(sMacAddress)) {
             sMacAddress = "";
             try {
