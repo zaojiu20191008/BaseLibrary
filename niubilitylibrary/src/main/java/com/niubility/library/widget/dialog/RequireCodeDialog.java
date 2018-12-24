@@ -134,8 +134,9 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
 
             @Override
             public void onFinish() {
-                dismiss();
-
+                if (isShowing()) {
+                    dismiss();
+                }
             }
         };
 

@@ -3,6 +3,7 @@ package com.niubility.library.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.lang.reflect.Method;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
@@ -49,4 +50,38 @@ public class DeviceUtils {
         }
         return sMacAddress;
     }
+
+
+    /**
+
+     * getSerialNumber
+
+     * @return result
+
+     */
+
+    public static String getSerialNumber(){
+
+//        String serial = null;
+//
+//        try {
+//
+//            Class<?> c = Class.forName("android.os.SystemProperties");
+//
+//            Method get =c.getMethod("get", String.class);
+//
+//            serial = (String)get.invoke(c, "ro.serialno");
+//
+//        } catch (Exception e) {
+//
+//            e.printStackTrace();
+//
+//        }
+//
+//        return serial;
+
+        return android.os.Build.SERIAL;
+
+    }
+
 }
