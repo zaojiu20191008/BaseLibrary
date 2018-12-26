@@ -48,4 +48,34 @@ public class HttpResult<T> implements Serializable {
     public void setResult(T result) {
         this.result = result;
     }
+
+
+
+    private int ret;
+    private String error_msg;
+    private T data;
+
+    public int getRet() {
+        return ret;
+    }
+
+    public void setRet(int ret) {
+        this.ret = ret;
+    }
+
+    public String getError_msg() {
+        return error_msg;
+    }
+
+    public void setError_msg(String error_msg) {
+        this.error_msg = error_msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 }

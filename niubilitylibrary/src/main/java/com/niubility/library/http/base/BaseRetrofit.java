@@ -1,5 +1,7 @@
 package com.niubility.library.http.base;
 
+import com.niubility.library.http.GsonExConverterFactory;
+
 import java.util.HashMap;
 
 import okhttp3.OkHttpClient;
@@ -51,7 +53,8 @@ public class BaseRetrofit {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(HttpClient.getInstance().getOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonExConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
