@@ -6,6 +6,10 @@ import android.support.annotation.Nullable;
 import com.niubility.library.mvp.BasePresenter;
 import com.niubility.library.mvp.BaseView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.ButterKnife;
 
 /**
@@ -34,6 +38,7 @@ public abstract class BaseMvpActivity<V extends BaseView, P extends BasePresente
             getLifecycle().addObserver(mPresenter);
         }
         init();
+        EventBus.getDefault().register(this);
     }
 
     protected abstract P createPresenter();
@@ -41,5 +46,14 @@ public abstract class BaseMvpActivity<V extends BaseView, P extends BasePresente
     protected abstract int getLayoutId();
     protected abstract void init();
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(BaseEvent event){
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }
