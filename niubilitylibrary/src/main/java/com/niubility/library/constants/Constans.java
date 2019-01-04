@@ -9,4 +9,9 @@ public class Constans {
     public static final String KEY_HANDOVER_ID = "key_handover_id";
     public static final String KEY_TIME = "key_time";
 
+    /* 挂单 */
+    public static final String KEY_ENTRY_ORDERS_NOTE = "key_entry_orders_note";
+    public static final String KEY_ENTRY_ORDERS_TIME = "key_entry_orders_time";
+    public static final String KEY_ENTRY_ORDERS_LIST = "key_entry_orders_list";
+
 }
