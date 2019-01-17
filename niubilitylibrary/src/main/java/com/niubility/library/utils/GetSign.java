@@ -17,4 +17,9 @@ public class GetSign {
         Log.i("MD5测试", MD5.md5(web_key + "1516602310" + web_secret) + " <----------------------> " + s);
         return MD5.md5(s);
     }
+
+    public static String getSigns(long time) {
+        String s = "24" + String.valueOf(time) + web_secret;
+        return MD5.md5(s);
+    }
 }

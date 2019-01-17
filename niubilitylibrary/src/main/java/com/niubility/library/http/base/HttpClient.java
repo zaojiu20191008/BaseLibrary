@@ -144,5 +144,19 @@ public class HttpClient {
         return head;
     }
 
+    public Map<String,String> getHeaders(){
+        Map<String, String> head = new HashMap<>();
+        head.put("LC-Appkey", "24");
+
+        SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
+        long time = sp.getLong(Constans.KEY_TIME, 0);
+        String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+
+        head.put("LC-Sign", GetSign.getSigns(new Date().getTime() / 1000));
+        head.put("LC-Session", session_id);
+        head.put("LC-Timestamp", String.valueOf(new Date().getTime() / 1000));
+
+        return head;
+    }
 
 }
