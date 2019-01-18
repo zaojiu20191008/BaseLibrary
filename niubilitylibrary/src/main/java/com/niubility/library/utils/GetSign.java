@@ -18,14 +18,13 @@ public class GetSign {
         return MD5.md5(s);
     }
 
-    public static String sign(long time) {
-        String s = "25" + String.valueOf(time) + web_secret;
+    public static String getSigns(long time) {
+        String s = "24" + String.valueOf(time) + web_secret;
         return MD5.md5(s);
     }
 
-    public static String getSigns(long time) {
-        String s = "24" + String.valueOf(time) + web_secret;
-        Log.i("MD5测试", MD5.md5(web_key + "1516602310" + web_secret) + " <----------------------> " + s);
+    public static String sign(long time) {
+        String s = "25" + String.valueOf(time) + web_secret;
         return MD5.md5(s);
     }
 
