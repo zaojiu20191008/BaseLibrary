@@ -31,7 +31,7 @@ public abstract class BasePresenter<V extends BaseView> implements LifecycleObse
     /**
      * 收集订阅的observer，页面销毁时统一进行停止订阅操作
      */
-    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+    protected CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
 
     /**

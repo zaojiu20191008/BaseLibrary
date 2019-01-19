@@ -22,4 +22,14 @@ public class GetSign {
         String s = "24" + String.valueOf(time) + web_secret;
         return MD5.md5(s);
     }
+
+    public static String sign(long time) {
+        String s = "25" + String.valueOf(time) + web_secret;
+        return MD5.md5(s);
+    }
+
+    public static String sign(String key, String secret, long time) {
+        String s = key + String.valueOf(time) + secret;
+        return MD5.md5(s);
+    }
 }

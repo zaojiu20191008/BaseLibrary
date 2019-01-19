@@ -4,9 +4,13 @@ import android.net.ParseException;
 import android.util.Log;
 
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
+import com.niubility.library.http.base.HttpResult;
+import com.niubility.library.utils.GsonUtils;
 
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -14,6 +18,7 @@ import java.net.UnknownServiceException;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
 /**
@@ -98,8 +103,23 @@ public class HttpExceptionEngine {
         if (e instanceof HttpException) {//   HTTP错误
             HttpException httpException = (HttpException) e;
             err_type = Error.HTTP;
-            err_code = httpException.code();
-            err_msg = httpException.response().toString();
+            ResponseBody responseBody = httpException.response().errorBody();
+            try {
+                if(responseBody != null) {
+                    String response = responseBody.string();
+                    HttpResult result = GsonUtils.getInstance().getGson().fromJson(response, HttpResult.class);
+                    if (result != null) {
+                        err_code = result.getErr_code();
+                        err_msg = result.getErr_msg();
+                    }
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            if(err_code == Error.UNKNOWN) {
+                err_code = httpException.code();
+                err_msg = httpException.response().toString();
+            }
         } else if (e instanceof SocketTimeoutException) {//  连接超时
             err_type = Error.NETWORK;
             err_msg = "服务器响应超时";

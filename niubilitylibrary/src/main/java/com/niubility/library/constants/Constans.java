@@ -8,6 +8,8 @@ public class Constans {
     public static final String KEY_SESSION_ID = "key_session_id";
     public static final String KEY_HANDOVER_ID = "key_handover_id";
     public static final String KEY_TIME = "key_time";
+    public static final String KEY_APPKEY = "key_appkey";
+    public static final String KEY_SECRET = "key_secret";
 
     /* 挂单 */
     public static final String KEY_ENTRY_ORDERS_LIST = "key_entry_orders_list";
