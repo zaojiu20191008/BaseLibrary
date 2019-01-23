@@ -7,14 +7,22 @@ import java.io.Serializable;
  */
 public class HttpResult<T> implements Serializable {
 
+    private int return_code;
+    private String return_msg;
+
     private int err_code;
     private String err_msg;
+
     private String meta;
     private T result;
 
+    private int ret;
+    private String error_msg;
+    private T data;
+
 
     public boolean isSuccessful() {
-        return err_code == 200;
+        return err_code == 200 || return_code == 200;
     }
 
     public int getErr_code() {
@@ -50,11 +58,6 @@ public class HttpResult<T> implements Serializable {
     }
 
 
-
-    private int ret;
-    private String error_msg;
-    private T data;
-
     public int getRet() {
         return ret;
     }
@@ -77,5 +80,22 @@ public class HttpResult<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+
+    public int getReturn_code() {
+        return return_code;
+    }
+
+    public void setReturn_code(int return_code) {
+        this.return_code = return_code;
+    }
+
+    public String getReturn_msg() {
+        return return_msg;
+    }
+
+    public void setReturn_msg(String return_msg) {
+        this.return_msg = return_msg;
     }
 }

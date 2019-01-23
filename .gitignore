@@ -58,8 +58,16 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 
+# Version control
+vcs.xml
 
+# lint
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+# lint/reports/
 
 #####
 .DS_Store
-.externalNativeBuild
+.externalNativeBuild/
