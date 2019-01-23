@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/x740"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_dialog_require_code">
 
     <TextView
         android:id="@+id/textview_titile"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/x740"
         android:layout_height="@dimen/y90"
         android:layout_marginTop="@dimen/y56"
+        android:gravity="center"
         android:text="@string/text_login_vip"
         android:textColor="@color/color_333333"
         android:textSize="@dimen/x46"
@@ -27,8 +27,8 @@
         android:layout_marginTop="@dimen/y46"
         android:layout_marginEnd="@dimen/x50"
         android:contentDescription="@string/text_contentDescription_image"
-        android:visibility="visible"
         android:scaleType="fitCenter"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_titile"
@@ -39,9 +39,9 @@
         android:id="@+id/textview_content"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/y60"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/y70"
+        android:layout_marginEnd="8dp"
         android:text="@string/tip_require_code_vip"
         android:textColor="@color/color_333333"
         android:textSize="@dimen/x40"
@@ -54,9 +54,9 @@
         android:id="@+id/textView_cdTime"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/y80"
-        android:layout_marginBottom="@dimen/y50"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="@dimen/y50"
         android:gravity="center"
         android:text="@string/text_time_count_down"
         android:textColor="@color/color_333333"
@@ -74,22 +74,20 @@
         android:layout_marginTop="@dimen/y50"
         android:layout_marginEnd="@dimen/x50"
         android:layout_marginRight="@dimen/x50"
+        android:src="@drawable/close"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/close" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editText_barcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:inputType="text"
         android:text=""
         android:textColor="#00FFFFFF"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:visibility="visible"
-        android:background="#00FFFFFF"/>
-
-
+        android:visibility="visible" />
 
 </android.support.constraint.ConstraintLayout>

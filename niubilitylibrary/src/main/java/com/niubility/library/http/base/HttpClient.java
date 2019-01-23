@@ -133,10 +133,47 @@ public class HttpClient {
     }
 
     /**
+     * 动态appkey、secret, 不需session_id
+     * @return
+     */
+    public Map<String, String> getLoginSignHeader() {
+        Map<String, String> head = new HashMap<>();
+
+        SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
+
+        String appkey = sp.getString(Constans.KEY_APPKEY, "");
+        String secret = sp.getString(Constans.KEY_SECRET, "");
+        final long time = new Date().getTime() / 1000;
+
+        head.put("LC-Appkey", appkey);
+        head.put("LC-Sign", GetSign.sign(appkey, secret, time));
+        head.put("LC-Session", "");
+        head.put("LC-Timestamp",  String.valueOf(time));
+
+        return head;
+    }
+
+    /**
      * 登录头部
      * @return
      */
     public Map<String, String> getHeader() {
+//        Map<String, String> head = new HashMap<>();
+//        head.put("LC-Appkey", "723949279");
+//
+//        SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
+//        long time = sp.getLong(Constans.KEY_TIME, 0);
+//        String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+//
+//        head.put("LC-Sign", GetSign.getSign(time));
+//        head.put("LC-Session", session_id);
+//        head.put("LC-Timestamp", String.valueOf(time));
+//
+//        return head;
+        return getSignHeader();
+    }
+
+    public Map<String, String> getOldHeader() {
         Map<String, String> head = new HashMap<>();
         head.put("LC-Appkey", "723949279");
 
@@ -151,5 +188,39 @@ public class HttpClient {
         return head;
     }
 
+    public Map<String,String> getHeaders(){
+        Map<String, String> head = new HashMap<>();
+        head.put("LC-Appkey", "24");
 
+        SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
+        long time = sp.getLong(Constans.KEY_TIME, 0);
+        String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+
+        head.put("LC-Sign", GetSign.getSigns(new Date().getTime() / 1000));
+        head.put("LC-Session", session_id);
+        head.put("LC-Timestamp", String.valueOf(new Date().getTime() / 1000));
+
+        return head;
+    }
+
+    /**
+     * 动态获取appkey、secret
+     * @return
+     */
+    public Map<String, String> getSignHeader() {
+        Map<String, String> head = new HashMap<>();
+        long time = new Date().getTime() / 1000;
+
+        SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
+        String appkey = sp.getString(Constans.KEY_APPKEY, "");
+        String secret = sp.getString(Constans.KEY_SECRET, "");
+        String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+
+        head.put("LC-Appkey", appkey);
+        head.put("LC-Sign", GetSign.sign(appkey, secret, time));
+        head.put("LC-Session", session_id);
+        head.put("LC-Timestamp", String.valueOf(time));
+
+        return head;
+    }
 }
