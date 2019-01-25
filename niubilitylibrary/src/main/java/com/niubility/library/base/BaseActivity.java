@@ -12,7 +12,6 @@ import com.niubility.library.utils.ToastUtils;
 
 public class BaseActivity extends AppCompatActivity implements BaseView {
 
-
     @Override
     public void showToast(String msg) {
         ToastUtils.showToast(this, msg);
@@ -30,6 +29,9 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (!isFocus()) {
+            return super.dispatchTouchEvent(ev);
+        }
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
             if (isShouldHideInput(v, ev)) {
@@ -70,4 +72,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         return false;
     }
 
+    public boolean isFocus() {
+       return true;
+    }
 }
