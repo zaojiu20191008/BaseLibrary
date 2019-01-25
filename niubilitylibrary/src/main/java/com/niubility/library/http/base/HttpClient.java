@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.niubility.library.BuildConfig;
 import com.niubility.library.base.BaseApplication;
 import com.niubility.library.constants.Constans;
 import com.niubility.library.utils.GetSign;
@@ -58,7 +59,13 @@ public class HttpClient {
                 Log.i(TAG, "log: " + TransCodeUtils.decodeUnicode(message));
             }
         });
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        if (BuildConfig.DEBUG) {
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        }else {
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+        }
+
 
         //可统一添加请求头
         mLoginInterceptor = new Interceptor() {

@@ -47,7 +47,8 @@ final class GsonResponseBody<T> implements Converter<ResponseBody, T> {
                 }
             }).create();
             HttpResult result = mGson.fromJson(response, HttpResult.class);
-            if ((result.getErr_code() == 200) || (result.getRet() == 200)) {
+            if ((result.getErr_code() == 200) || (result.getRet() == 200)
+                    || result.getReturn_code() == 200) {
                 return gson.fromJson(response, type);
             } else {
                 Log.i("GsonResponseBody", result.toString());
