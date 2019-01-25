@@ -78,6 +78,8 @@ public abstract class BaseDialog extends DialogFragment {
                 } else {
                     params.y -= ScreenUtils.getStatusHeight(getContext());
                 }
+            } else {
+                params.gravity = Gravity.CENTER;
             }
             if (mIsBottom) {
                 params.gravity = Gravity.BOTTOM;
