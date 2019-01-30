@@ -37,4 +37,13 @@ public class TimeUtils {
         Date date = new Date(lt);
         return simpleDateFormat.format(date);
     }
+
+    /*
+     * 将时间戳转换为时间
+     */
+    public static String stampToDate(long time){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(time);
+        return simpleDateFormat.format(date);
+    }
 }
