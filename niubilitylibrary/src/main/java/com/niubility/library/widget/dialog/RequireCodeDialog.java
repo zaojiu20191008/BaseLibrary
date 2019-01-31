@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -102,7 +103,9 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
         }*/
 
         imageView_close.setOnClickListener(this);
-
+        if (!TextUtils.isEmpty(titleText)) {
+            titleView.setText(titleText);
+        }
         setOnCancelListener(this);
 
         countDownTimer = new CountDownTimer(120*1000, 1000) {
