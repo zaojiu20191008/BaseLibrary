@@ -17,9 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.niubility.library.R;
+import com.niubility.library.utils.EventUtils;
 
 
-public class RequireCodeDialog extends Dialog implements View.OnClickListener, DialogInterface.OnCancelListener {
+public class RequireCodeDialog extends Dialog implements View.OnClickListener, DialogInterface.OnCancelListener,DialogInterface.OnDismissListener {
 
     private Context context;
     private OnScanCodeListener scanCodeListener;
@@ -33,6 +34,7 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
 
     private boolean isScanCode = true;
 
+    private String type = "NORMAL";
     private String titleText;
     private String contentText;
     private boolean isShowImage = false;
@@ -107,6 +109,7 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
             titleView.setText(titleText);
         }
         setOnCancelListener(this);
+        setOnDismissListener(this);
 
         countDownTimer = new CountDownTimer(120*1000, 1000) {
             @Override
@@ -211,6 +214,10 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
 
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public void onClick(View v) {
         int i = v.getId();
@@ -251,6 +258,13 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
 
     public void setEnableScanCode(boolean scanCode) {
         isScanCode = scanCode;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        if ("REQUEST_RELEASE_COUPONS".equals(type)){
+            EventUtils.post(type);
+        }
     }
 
     /*@Override
