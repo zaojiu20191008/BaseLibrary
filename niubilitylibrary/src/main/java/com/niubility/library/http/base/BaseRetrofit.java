@@ -43,6 +43,7 @@ public class BaseRetrofit {
             retrofit = mRetrofitHashMap.get(baseurl);
         } else {
             retrofit = createrRetrofit(baseurl);
+            mRetrofitHashMap.put(baseurl, retrofit);
         }
 
         return retrofit;

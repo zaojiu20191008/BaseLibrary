@@ -152,7 +152,8 @@ public class HttpExceptionEngine {
         String sb = "handleExceptionToMap: --> " +
                 ErrorType + ":" + err_type +
                 ", " + ErrorCode + ":" + err_code +
-                ", " + ErrorMsg + ":" + err_msg;
+                ", " + ErrorMsg + ":" + err_msg +
+                ", exception ：" + e.getMessage();
         Log.i(TAG, sb);
 
         return result;

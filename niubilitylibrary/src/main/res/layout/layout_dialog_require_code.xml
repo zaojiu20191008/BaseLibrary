@@ -85,9 +85,11 @@
         android:background="#00FFFFFF"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:inputType="text"
+        android:inputType="number"
         android:text=""
         android:textColor="#00FFFFFF"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
