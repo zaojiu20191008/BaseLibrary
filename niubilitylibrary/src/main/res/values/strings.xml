@@ -14,4 +14,9 @@
     <string name="text_cancel">取消</string>
 
     <string name="text_content_input">输入内容</string>
+
+    <string name="text_not_enough_money">余额不足</string>
+
+    <string name="text_kindly_reminder">温馨提示</string>
+
 </resources>

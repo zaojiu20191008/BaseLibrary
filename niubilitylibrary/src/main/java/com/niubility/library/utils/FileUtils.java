@@ -1,4 +1,4 @@
-package com.niubility.library.tools;
+package com.niubility.library.utils;
 
 import android.text.TextUtils;
 
