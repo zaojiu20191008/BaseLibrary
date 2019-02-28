@@ -20,7 +20,7 @@ import com.niubility.library.R;
 import com.niubility.library.utils.EventUtils;
 
 
-public class RequireCodeDialog extends Dialog implements View.OnClickListener, DialogInterface.OnCancelListener,DialogInterface.OnDismissListener {
+public class RequireCodeDialog extends Dialog implements View.OnClickListener, DialogInterface.OnCancelListener {
 
     private Context context;
     private OnScanCodeListener scanCodeListener;
@@ -109,7 +109,6 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
             titleView.setText(titleText);
         }
         setOnCancelListener(this);
-        setOnDismissListener(this);
 
         countDownTimer = new CountDownTimer(120*1000, 1000) {
             @Override
@@ -141,6 +140,9 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
             @Override
             public void onFinish() {
                 if (isShowing()) {
+                    if ("REQUEST_RELEASE_COUPONS".equals(type)){
+                        EventUtils.post(type);
+                    }
                     dismiss();
                 }
             }
@@ -222,6 +224,9 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.imageView_close) {
+            if ("REQUEST_RELEASE_COUPONS".equals(type)){
+                EventUtils.post(type);
+            }
             dismiss();
         }
 
@@ -258,13 +263,6 @@ public class RequireCodeDialog extends Dialog implements View.OnClickListener, D
 
     public void setEnableScanCode(boolean scanCode) {
         isScanCode = scanCode;
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        if ("REQUEST_RELEASE_COUPONS".equals(type)){
-            EventUtils.post(type);
-        }
     }
 
     /*@Override
