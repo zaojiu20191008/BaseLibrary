@@ -18,13 +18,13 @@ public class ScreenUtils {
         return dm;
     }
 
-//    public static DisplayMetrics getScreenRealSize(Activity context) {
-//        Display defaultDisplay = context.getWindowManager().getDefaultDisplay();
-//        DisplayMetrics dm = new DisplayMetrics();
-//        defaultDisplay.getRealMetrics(dm);
-//
-//        return dm;
-//    }
+    public static DisplayMetrics getScreenRealSize(Activity context) {
+        Display defaultDisplay = context.getWindowManager().getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        defaultDisplay.getRealMetrics(dm);
+
+        return dm;
+    }
 
 
     /**
@@ -86,6 +86,8 @@ public class ScreenUtils {
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+//        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
     }
 

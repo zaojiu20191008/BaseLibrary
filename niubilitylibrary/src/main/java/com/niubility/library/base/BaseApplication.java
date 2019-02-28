@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.niubility.library.tools.CrashHandler;
-import com.niubility.library.tools.FileUtils;
+import com.niubility.library.utils.FileUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
