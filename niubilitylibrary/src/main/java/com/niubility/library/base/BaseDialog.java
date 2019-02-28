@@ -83,7 +83,6 @@ public abstract class BaseDialog extends DialogFragment {
             }
             if (mIsBottom) {
                 params.gravity = Gravity.BOTTOM;
-                params.height = dip2px(mDialogHeight);
             }
             if (shouldHideBackground()) {
                 params.dimAmount = 0.0f;
@@ -144,9 +143,8 @@ public abstract class BaseDialog extends DialogFragment {
         showDialog(activity, tag);
     }
 
-    public void showBottom(FragmentActivity activity, String tag, int height) {
+    public void showBottom(FragmentActivity activity, String tag) {
         mIsBottom = true;
-        mDialogHeight = height;
         showDialog(activity, tag);
     }
 
