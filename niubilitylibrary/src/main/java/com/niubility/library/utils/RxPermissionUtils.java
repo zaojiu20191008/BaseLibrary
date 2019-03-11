@@ -8,6 +8,8 @@ import android.widget.Toast;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.util.Arrays;
+
 import io.reactivex.functions.Consumer;
 
 /**
@@ -16,11 +18,9 @@ import io.reactivex.functions.Consumer;
  */
 public class RxPermissionUtils {
     /*
-    *   1. checkPermission();
-    *   2. checkPermissionIsOpen(); true:执行操作
-    *   3. setCallbackListener(); 若点击开启，执行操作
-    */
-    private boolean isOpen = false;
+     *   1. checkPermission();
+     *   2. setCallbackListener(); 若点击开启，执行操作
+     */
     private static volatile RxPermissionUtils instance;
 
     public static RxPermissionUtils getInstance() {
@@ -58,30 +58,13 @@ public class RxPermissionUtils {
                         if (listener != null) {
                             listener.onCallback();
                         }
-                        isOpen = true;
                     } else if (permission.shouldShowRequestPermissionRationale) {
-                        for (int i = 0; i < permissions.length; i++) {
-                            if (permissions[i].equals(permission.name)) {
-                                Toast.makeText(activity, "您拒绝了" + describe[i] + "权限", Toast.LENGTH_SHORT).show();
-                                break;
-                            }
-                        }
-                        isOpen = false;
+                        Toast.makeText(activity, "您拒绝了 " + Arrays.toString(describe) + " 权限", Toast.LENGTH_SHORT).show();
                     } else {
-                        for (int i = 0; i < permissions.length; i++) {
-                            if (permissions[i].equals(permission.name)) {
-                                Toast.makeText(activity, "您拒绝了" + describe[i] + "权限，需要您到设置手动开启", Toast.LENGTH_SHORT).show();
-                                break;
-                            }
-                        }
-                        isOpen = false;
+                        Toast.makeText(activity, "您已禁止开启 " + Arrays.toString(describe) + " 权限，需要您到设置手动开启", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
-    }
-
-    public boolean checkPermissionIsOpen(){
-        return isOpen;
     }
 }
