@@ -7,5 +7,7 @@ public interface BaseView {
 
     void showLoading();
 
+    void showLoading(String msg);
+
     void hideLoading();
 }

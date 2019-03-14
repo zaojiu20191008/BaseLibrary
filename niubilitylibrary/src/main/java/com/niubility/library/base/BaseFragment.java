@@ -18,6 +18,11 @@ public class BaseFragment extends Fragment implements BaseView {
     }
 
     @Override
+    public void showLoading(String msg) {
+
+    }
+
+    @Override
     public void hideLoading() {
 
     }
