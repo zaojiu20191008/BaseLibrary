@@ -5,18 +5,25 @@ import android.util.Log;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+import com.niubility.library.base.BaseApplication;
 import com.niubility.library.http.base.HttpResult;
+import com.niubility.library.utils.FileUtils;
 import com.niubility.library.utils.GsonUtils;
 
 import org.json.JSONException;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.net.UnknownServiceException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import okhttp3.ResponseBody;
 import retrofit2.HttpException;
@@ -149,12 +156,21 @@ public class HttpExceptionEngine {
         result.put(ErrorCode, err_code);
         result.put(ErrorMsg, err_msg);
 
-        String sb = "handleExceptionToMap: --> " +
-                ErrorType + ":" + err_type +
-                ", " + ErrorCode + ":" + err_code +
-                ", " + ErrorMsg + ":" + err_msg +
-                ", exception ：" + e.getMessage();
-        Log.i(TAG, sb);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
+        String formatDate = simpleDateFormat.format(new Date());
+        String content = "====================interface====================" + "\n" +
+                formatDate + "\n" +
+                ErrorType + ":" + err_type + "\n" +
+                ErrorCode + ":" + err_code + "\n" +
+                ErrorMsg + ":" + err_msg + "\n" +
+                "exception:" + e.getMessage() + "\n" +
+                "\n";
+
+        Log.i(TAG, content);
+
+        File file = new File(BaseApplication.logDir, "interface.txt");
+        FileUtils.writeToFile(file, content, true);
 
         return result;
     }

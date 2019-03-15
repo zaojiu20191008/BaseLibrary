@@ -17,7 +17,7 @@ public class BaseApplication extends Application {
 
     public static Context sApplication;
     protected boolean openCrashHandler = false;
-    public File logDir;
+    public static File logDir;
 
     @Override
     public void onCreate() {
