@@ -23,6 +23,11 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
     }
 
     @Override
+    public void showLoading(String msg) {
+
+    }
+
+    @Override
     public void hideLoading() {
 
     }

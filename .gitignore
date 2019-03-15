@@ -1,17 +1,19 @@
 # Built application files
 *.apk
-*.ap_
+#*.ap_
+debug/
+release/
 
 # Files for the ART/Dalvik VM
 *.dex
 
 # Java class files
-*.class
+#*.class
 
 # Generated files
 bin/
 gen/
-out/
+#out/
 
 # Gradle files
 .gradle/
@@ -24,7 +26,7 @@ local.properties
 proguard/
 
 # Log Files
-*.log
+#*.log
 
 # Android Studio Navigation editor temp files
 .navigation/
@@ -58,16 +60,12 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 
-# Version control
-vcs.xml
-
 # lint
 lint/intermediates/
 lint/generated/
 lint/outputs/
 lint/tmp/
-# lint/reports/
+#lint/reports/
 
-#####
+#
 .DS_Store
-.externalNativeBuild/

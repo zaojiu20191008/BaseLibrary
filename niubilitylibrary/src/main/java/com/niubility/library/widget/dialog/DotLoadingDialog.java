@@ -3,6 +3,7 @@ package com.niubility.library.widget.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -29,6 +30,12 @@ public class DotLoadingDialog extends Dialog {
     private String text_loading;
     private int id_drawable_loading;
 
+    private boolean enableCD = false;
+    private int cdDuration = 20;
+    private CountDownTimer countDownTimer;
+
+
+
     public DotLoadingDialog(Context context) {
         super(context, R.style.Loading);
 //        this.setContentView(R.layout.layout_dialog_loading);
@@ -51,7 +58,6 @@ public class DotLoadingDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
     }
@@ -113,7 +119,30 @@ public class DotLoadingDialog extends Dialog {
 
         this.mHandler.sendEmptyMessageDelayed(1, 800L);
         this.mDotSeq = 0;
+
         super.show();
+
+
+
+        if (enableCD) {
+            countDownTimer = new CountDownTimer(1000 * cdDuration, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+
+                    if (cdListener != null) {
+                        cdListener.onCDFinish(DotLoadingDialog.this);
+                    }
+
+                }
+            };
+
+            countDownTimer.start();
+        }
     }
 
     public void hide() {
@@ -122,10 +151,46 @@ public class DotLoadingDialog extends Dialog {
         this.mLoadingDot1.setAlpha(1.0F);
         this.mLoadingDot2.setAlpha(0.6F);
         this.mLoadingDot3.setAlpha(0.3F);
+
+
+        if (this.countDownTimer != null ) {
+            this.countDownTimer.cancel();
+        }
+
         super.dismiss();
     }
 
     public void setId_drawable_loading(int id_drawable_loading) {
         this.id_drawable_loading = id_drawable_loading;
+    }
+
+
+
+
+    public void setEnableCD(boolean enableCD) {
+        this.enableCD = enableCD;
+    }
+
+    public void setCdDuration(int cdDuration) {
+        this.cdDuration = cdDuration;
+    }
+
+    private CDListener cdListener;
+
+    public void setCdListener(CDListener cdListener) {
+        this.cdListener = cdListener;
+    }
+
+    /**
+     * 倒计时结束监听器
+     */
+    public interface CDListener {
+
+        /**
+         * 倒计时结束时回调此函数
+         *
+         * @param currentDialog
+         */
+        void onCDFinish(DotLoadingDialog currentDialog);
     }
 }
