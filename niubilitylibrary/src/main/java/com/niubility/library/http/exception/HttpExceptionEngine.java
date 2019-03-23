@@ -9,6 +9,7 @@ import com.niubility.library.base.BaseApplication;
 import com.niubility.library.http.base.HttpResult;
 import com.niubility.library.utils.FileUtils;
 import com.niubility.library.utils.GsonUtils;
+import com.niubility.library.utils.LogUtils;
 
 import org.json.JSONException;
 
@@ -169,7 +170,7 @@ public class HttpExceptionEngine {
 
         Log.i(TAG, content);
 
-        File file = new File(BaseApplication.logDir, "interface.txt");
+        File file = new File(BaseApplication.logDir, LogUtils.getFormatFileName("interface"));
         FileUtils.writeToFile(file, content, true);
 
         return result;

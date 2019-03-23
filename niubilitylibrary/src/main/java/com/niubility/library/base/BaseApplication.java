@@ -6,6 +6,7 @@ import android.os.Environment;
 
 import com.niubility.library.tools.CrashHandler;
 import com.niubility.library.utils.FileUtils;
+import com.niubility.library.utils.LogUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -27,6 +28,9 @@ public class BaseApplication extends Application {
         if(isOpenCrashHandler()) {
 
             initDir();
+
+            //定时清理日志
+            LogUtils.autoClearInDir(BaseApplication.logDir);
 
             CrashHandler crashHandler = CrashHandler.getInstance();
             crashHandler.init(sApplication, new CrashHandler.OnCrashHandleListener() {
@@ -76,7 +80,7 @@ public class BaseApplication extends Application {
                 .append("\n")
                 .toString();
 
-        File testFile = new File(logDir, "crash.txt");
+        File testFile = new File(logDir, LogUtils.getFormatFileName("crash"));
         FileUtils.writeToFile(testFile, content, true);
     }
 
