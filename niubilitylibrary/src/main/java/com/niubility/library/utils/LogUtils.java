@@ -33,8 +33,10 @@ public class LogUtils {
     public static void autoClearInDir(File dir) {
         if(dir != null && dir.exists() && dir.isDirectory()) {
             File[] files = dir.listFiles();
-            for (File file : files) {
-                autoClear(file);
+            if(files != null) {
+                for (File file : files) {
+                    autoClear(file);
+                }
             }
         }
     }

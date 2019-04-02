@@ -47,13 +47,23 @@ final class GsonResponseBody<T> implements Converter<ResponseBody, T> {
                 }
             }).create();
             HttpResult result = mGson.fromJson(response, HttpResult.class);
-            if ((result.getErr_code() == 200) || (result.getRet() == 200)
-                    || result.getReturn_code() == 200) {
+            int err_code = result.getErr_code();
+            int ret = result.getRet();
+            int return_code = result.getReturn_code();
+            if ((err_code == 200) || (ret == 200)
+                    || return_code == 200) {
                 return gson.fromJson(response, type);
             } else {
                 Log.i("GsonResponseBody", result.toString());
-                ApiException resultException = new ApiException(result.getRet(),
-                        result.getErr_msg() != null ? result.getErr_msg() : result.getError_msg());
+                ApiException resultException;
+                if(err_code != 200 && ret == 0 && return_code == 0) {
+                    resultException = new ApiException(err_code, result.getErr_msg());
+                } else if(err_code == 0 && ret != 200 && return_code == 0) {
+                    resultException = new ApiException(ret,
+                            result.getErr_msg() != null ? result.getErr_msg() : result.getError_msg());
+                } else {
+                    resultException = new ApiException(return_code, result.getReturn_msg());
+                }
                 throw resultException;
             }
         } finally {
