@@ -2,4 +2,7 @@
           package="com.niubility.library">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <application>
+        <activity android:name=".common.config.ConfigPreferenceActivity" />
+    </application>
 </manifest>

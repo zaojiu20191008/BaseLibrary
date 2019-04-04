@@ -19,4 +19,8 @@
 
     <string name="text_kindly_reminder">温馨提示</string>
 
+
+    <!--配置-->
+    <string name="key_environment">key_environment</string>
+
 </resources>
