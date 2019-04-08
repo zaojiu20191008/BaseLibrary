@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.niubility.library.BuildConfig;
 import com.niubility.library.base.BaseApplication;
-import com.niubility.library.constants.Constans;
+import com.niubility.library.common.constants.BaseConstants;
 import com.niubility.library.utils.GetSign;
 import com.niubility.library.utils.SharedPreferencesUtils;
 import com.niubility.library.utils.TransCodeUtils;
@@ -74,8 +74,8 @@ public class HttpClient {
             public Response intercept(@NonNull Chain chain) throws IOException {
 
                 SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
-                long time = sp.getLong(Constans.KEY_TIME, 0);
-                String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+                long time = sp.getLong(BaseConstants.KEY_TIME, 0);
+                String session_id = sp.getString(BaseConstants.KEY_SESSION_ID, "");
 
                 Request original = chain.request();
                 Request request = original.newBuilder()
@@ -128,7 +128,7 @@ public class HttpClient {
         head.put("LC-Timestamp",  String.valueOf(time));
 
         SharedPreferences.Editor editor = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication).edit();
-        editor.putLong(Constans.KEY_TIME, time).apply();
+        editor.putLong(BaseConstants.KEY_TIME, time).apply();
         return head;
     }
 
@@ -141,8 +141,8 @@ public class HttpClient {
 
         SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
 
-        String appkey = sp.getString(Constans.KEY_APPKEY, "");
-        String secret = sp.getString(Constans.KEY_SECRET, "");
+        String appkey = sp.getString(BaseConstants.KEY_APPKEY, "");
+        String secret = sp.getString(BaseConstants.KEY_SECRET, "");
         final long time = new Date().getTime() / 1000;
 
         head.put("LC-Appkey", appkey);
@@ -162,8 +162,8 @@ public class HttpClient {
 //        head.put("LC-Appkey", "723949279");
 //
 //        SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
-//        long time = sp.getLong(Constans.KEY_TIME, 0);
-//        String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+//        long time = sp.getLong(BaseConstants.KEY_TIME, 0);
+//        String session_id = sp.getString(BaseConstants.KEY_SESSION_ID, "");
 //
 //        head.put("LC-Sign", GetSign.getSign(time));
 //        head.put("LC-Session", session_id);
@@ -178,8 +178,8 @@ public class HttpClient {
         head.put("LC-Appkey", "723949279");
 
         SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
-        long time = sp.getLong(Constans.KEY_TIME, 0);
-        String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+        long time = sp.getLong(BaseConstants.KEY_TIME, 0);
+        String session_id = sp.getString(BaseConstants.KEY_SESSION_ID, "");
 
         head.put("LC-Sign", GetSign.getSign(time));
         head.put("LC-Session", session_id);
@@ -193,8 +193,8 @@ public class HttpClient {
         head.put("LC-Appkey", "24");
 
         SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
-        long time = sp.getLong(Constans.KEY_TIME, 0);
-        String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+        long time = sp.getLong(BaseConstants.KEY_TIME, 0);
+        String session_id = sp.getString(BaseConstants.KEY_SESSION_ID, "");
 
         head.put("LC-Sign", GetSign.getSigns(new Date().getTime() / 1000));
         head.put("LC-Session", session_id);
@@ -212,9 +212,9 @@ public class HttpClient {
         long time = new Date().getTime() / 1000;
 
         SharedPreferences sp = SharedPreferencesUtils.getInstance().getSharedPreferences(BaseApplication.sApplication);
-        String appkey = sp.getString(Constans.KEY_APPKEY, "");
-        String secret = sp.getString(Constans.KEY_SECRET, "");
-        String session_id = sp.getString(Constans.KEY_SESSION_ID, "");
+        String appkey = sp.getString(BaseConstants.KEY_APPKEY, "");
+        String secret = sp.getString(BaseConstants.KEY_SECRET, "");
+        String session_id = sp.getString(BaseConstants.KEY_SESSION_ID, "");
 
         head.put("LC-Appkey", appkey);
         head.put("LC-Sign", GetSign.sign(appkey, secret, time));

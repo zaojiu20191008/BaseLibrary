@@ -52,7 +52,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 //
 //        String content = sb.append("====================crash====================").append("\n")
 //                .append(formatDate).append("\n")
-//                .append("订单号：" + Config.out_trade_no).append("\n")
+//                .append("订单号：" + BaseConfig.out_trade_no).append("\n")
 //                .append(exceptionString)
 //                .append("\n")
 //                .append("\n")

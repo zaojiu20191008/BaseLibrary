@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <Preference android:title="全局配置" />
+
     <ListPreference
         android:title="环境配置"
         android:key="@string/key_environment"

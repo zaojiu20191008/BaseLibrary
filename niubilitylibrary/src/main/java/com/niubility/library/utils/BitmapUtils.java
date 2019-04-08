@@ -482,7 +482,7 @@ public final class BitmapUtils {
 //            int min = Math.min(width, hight);
             opts.inJustDecodeBounds = false;
             bitmap = Bitmap.createBitmap(argbByte, roundRect.width(), roundRect.height(), Bitmap.Config.ARGB_8888);
-//            bitmap = Bitmap.createBitmap(roundRect.width(), roundRect.height(), Bitmap.Config.ARGB_8888);
+//            bitmap = Bitmap.createBitmap(roundRect.width(), roundRect.height(), Bitmap.BaseConfig.ARGB_8888);
 //            bitmap.setPixels(argbByte, 0, roundRect.width(), 0, 0, roundRect.width(), roundRect.height());
             bitmap = Bitmap.createBitmap(bitmap, cropRect.left, cropRect.top, cropRect.width(), cropRect.height());
 
@@ -739,7 +739,7 @@ public final class BitmapUtils {
 //            int min = Math.min(width, hight);
             opts.inJustDecodeBounds = false;
             bitmap = Bitmap.createBitmap(argbByte, roundRect.width(), roundRect.height(), Bitmap.Config.ARGB_8888);
-//            bitmap = Bitmap.createBitmap(roundRect.width(), roundRect.height(), Bitmap.Config.ARGB_8888);
+//            bitmap = Bitmap.createBitmap(roundRect.width(), roundRect.height(), Bitmap.BaseConfig.ARGB_8888);
 //            bitmap.setPixels(argbByte, 0, roundRect.width(), 0, 0, roundRect.width(), roundRect.height());
             bitmap = Bitmap.createBitmap(bitmap, cropRect.left, cropRect.top, cropRect.width(), cropRect.height());
 

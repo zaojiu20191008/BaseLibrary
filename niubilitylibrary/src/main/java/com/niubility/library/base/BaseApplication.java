@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
-import com.niubility.library.common.config.Config;
+import com.niubility.library.common.config.BaseConfig;
 import com.niubility.library.tools.CrashHandler;
 import com.niubility.library.utils.FileUtils;
 import com.niubility.library.utils.LogUtils;
@@ -27,7 +27,7 @@ public class BaseApplication extends Application {
         sApplication = this;
 
         /* 加载全局配置 */
-        Config.readConfig(this);
+        BaseConfig.readConfig(this);
 
         if(isOpenCrashHandler()) {
 

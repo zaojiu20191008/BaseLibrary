@@ -23,8 +23,6 @@ public class WXPayConstants {
     public static final String FACEPAY_DELAY = "FACEPAY_DELAY";
     public static final String FACEID = "FACEID";
 
-    public static final String FAIL     = "FAIL";
-    public static final String SUCCESS  = "SUCCESS";
     public static final String HMACSHA256 = "HMAC-SHA256";
     public static final String MD5 = "MD5";
 
@@ -56,26 +54,65 @@ public class WXPayConstants {
     public static final String SANDBOX_SHORTURL_URL_SUFFIX     = "/sandboxnew/tools/shorturl";
     public static final String SANDBOX_AUTHCODETOOPENID_URL_SUFFIX = "/sandboxnew/tools/authcodetoopenid";*/
 
+
+
     /**
-     * 无效请求
+     * 接口请求成功
+     * 解决方案：无
      */
-    public static final String INVALID_REQUEST = "INVALID_REQUEST";
+    public static final String SUCCESS = "SUCCESS";
+
     /**
-     * 交易失败
+     * 接口请求失败
+     * 解决方案：展示失败原因
      */
-    public static final String TRADE_ERROR = "TRADE_ERROR";
+    public static final String FAIL = "FAIL";
+
     /**
-     * 系统错误
+     * 接口请求错误
+     * 解决方案：展示错误原因（该请求无法通过重试解决）
      */
-    public static final String SYSTEMERROR = "SYSTEMERROR";
+    public static final String ERROR = "ERROR";
+
     /**
-     * 请求参数错误
+     * 参数错误
+     * 解决方案：参照错误提示
      */
     public static final String PARAM_ERROR = "PARAM_ERROR";
+
+    /**
+     * 接口返回错误
+     * 解决方案：系统异常，可重试该请求
+     */
+    public static final String SYSTEMERROR = "SYSTEMERROR";
+
+    /**
+     * 用户退出了人脸识别
+     * 解决方案：返回到结账流程
+     */
+    public static final String USER_CANCEL = "USER_CANCEL";
+
+    /**
+     * 用户选择扫码支付
+     * 解决方案：进入扫码支付流程
+     */
+    public static final String SCAN_PAYMENT = "SCAN_PAYMENT";
+
+
     /**
      * 余额不足
      */
     public static final String NOTENOUGH = "NOTENOUGH";
+
+    /**
+     * 交易失败
+     */
+    public static final String TRADE_ERROR = "TRADE_ERROR";
+
+    /**
+     * 无效请求
+     */
+    public static final String INVALID_REQUEST = "INVALID_REQUEST";
 
 
 }

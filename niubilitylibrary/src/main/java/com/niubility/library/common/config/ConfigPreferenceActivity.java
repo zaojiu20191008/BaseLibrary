@@ -27,6 +27,6 @@ public class ConfigPreferenceActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Config.readConfig(ConfigPreferenceActivity.this);
+        BaseConfig.readConfig(ConfigPreferenceActivity.this);
     }
 }

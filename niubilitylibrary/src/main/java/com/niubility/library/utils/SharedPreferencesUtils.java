@@ -12,7 +12,7 @@ public class SharedPreferencesUtils {
     private static final String TAG = "SharedPreferencesUtils";
 
     /** 变量/常量说明 */
-    public static final String PREFERENCE_NAME = "Config";
+    public static final String PREFERENCE_NAME = "BaseConfig";
     private SharedPreferences mSharedPreference;
 
     public static SharedPreferencesUtils getInstance() {

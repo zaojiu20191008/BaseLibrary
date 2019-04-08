@@ -1,6 +1,6 @@
 package com.niubility.library.http.base;
 
-import com.niubility.library.common.config.Config;
+import com.niubility.library.common.config.BaseConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public abstract class BaseHttpAPI {
         /**用来存储某一环境下的一个或多个域名*/
         HashMap<String, String> urlMapTemp;
 
-        for (int i = 0; i < Config.environment_count; i++) {
+        for (int i = 0; i < BaseConfig.environment_count; i++) {
             urlMapTemp = new HashMap<>();
             for (int j = 0; j < urlKeyArray.length; j++) {
                 urlMapTemp.put(urlKeyArray[j], urlTwoDimensionArray[j][i]);

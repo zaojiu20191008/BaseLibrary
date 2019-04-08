@@ -6,14 +6,14 @@ import android.content.SharedPreferences;
 import com.niubility.library.BuildConfig;
 import com.niubility.library.R;
 
-public class Config {
+public class BaseConfig {
 
 
 
     /**
      * 配置sharedPreference名称
      */
-    public static final String sp_config = "Config";
+    public static final String sp_config = "BaseConfig";
 
     /**
      * 环境变量指示变量

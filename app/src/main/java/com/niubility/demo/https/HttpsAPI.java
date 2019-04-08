@@ -1,6 +1,6 @@
 package com.niubility.demo.https;
 
-import com.niubility.library.common.config.Config;
+import com.niubility.library.common.config.BaseConfig;
 import com.niubility.library.http.base.BaseHttpAPI;
 import com.niubility.library.http.base.BaseRetrofit;
 
@@ -42,13 +42,13 @@ public class HttpsAPI extends BaseHttpAPI {
             httpServiceStoreList.set(2, null);
         }
 
-        httpServiceStore = httpServiceStoreList.get(Config.environment_index);
+        httpServiceStore = httpServiceStoreList.get(BaseConfig.environment_index);
         if (httpServiceStore == null) {
             httpServiceStore = BaseRetrofit.getInstance()
                     .getCurrentEnvRetrofit(array_key_url[0])
                     .create(HttpServiceStore.class);
 
-            httpServiceStoreList.set(Config.environment_index, httpServiceStore);
+            httpServiceStoreList.set(BaseConfig.environment_index, httpServiceStore);
         }
 
         return httpServiceStore;
@@ -69,13 +69,13 @@ public class HttpsAPI extends BaseHttpAPI {
             httpServiceVipList.set(2, null);
         }
 
-        httpService_vip = httpServiceVipList.get(Config.environment_index);
+        httpService_vip = httpServiceVipList.get(BaseConfig.environment_index);
         if (httpService_vip == null) {
             httpService_vip = BaseRetrofit.getInstance()
                     .getCurrentEnvRetrofit(array_key_url[1])
                     .create(HttpServiceVip.class);
 
-            httpServiceVipList.set(Config.environment_index, httpService_vip);
+            httpServiceVipList.set(BaseConfig.environment_index, httpService_vip);
         }
 
         return httpService_vip;
@@ -92,13 +92,13 @@ public class HttpsAPI extends BaseHttpAPI {
 //            httpServiceList.set(2, null);
 //        }
 //
-//        httpService_vip = httpServiceList.get(Config.environment_index);
+//        httpService_vip = httpServiceList.get(BaseConfig.environment_index);
 //        if (httpService_vip == null) {
 //            httpService_vip = BaseRetrofit.getInstance()
 //                    .getCurrentEnvRetrofit(array_key_url[1])
 //                    .create(HttpServiceVip.class);
 //
-//            httpServiceList.set(Config.environment_index, httpService_vip);
+//            httpServiceList.set(BaseConfig.environment_index, httpService_vip);
 //        }
 //
 //        return httpService_vip;

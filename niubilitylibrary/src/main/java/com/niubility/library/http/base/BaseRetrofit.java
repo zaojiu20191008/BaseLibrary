@@ -1,16 +1,14 @@
 package com.niubility.library.http.base;
 
-import com.niubility.library.common.config.Config;
+import com.niubility.library.common.config.BaseConfig;
 import com.niubility.library.http.GsonExConverterFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -59,13 +57,13 @@ public class BaseRetrofit {
      */
     public Retrofit getCurrentEnvRetrofit(String urlKey) {
 
-        currentEnvRetrofitMap = retrofitMapList.get(Config.environment_index);
+        currentEnvRetrofitMap = retrofitMapList.get(BaseConfig.environment_index);
 
         if (currentEnvRetrofitMap.containsKey(urlKey)) {
             return currentEnvRetrofitMap.get(urlKey);
         }
 
-        Retrofit retrofit = createrRetrofit(urlMapList.get(Config.environment_index).get(urlKey));
+        Retrofit retrofit = createrRetrofit(urlMapList.get(BaseConfig.environment_index).get(urlKey));
         currentEnvRetrofitMap.put(urlKey, retrofit);
         return retrofit;
 
