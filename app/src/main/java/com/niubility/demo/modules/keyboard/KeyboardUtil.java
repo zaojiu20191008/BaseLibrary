@@ -1,15 +1,15 @@
-package com.niubility.demo;
+package com.niubility.demo.modules.keyboard;
 
 import android.app.Activity;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
-import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import com.niubility.demo.R;
 
 public class KeyboardUtil {
 

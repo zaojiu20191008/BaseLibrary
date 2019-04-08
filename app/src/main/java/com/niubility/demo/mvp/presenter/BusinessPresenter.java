@@ -6,7 +6,7 @@ import com.niubility.demo.mvp.contract.BusinessContract;
 import java.util.Map;
 
 public class BusinessPresenter extends LocalBasePresenter<BusinessContract.IBusinessView>
-        implements BusinessContract.IWaitPresenter {
+        implements BusinessContract.IBusinessPresenter {
 
     private String TAG = getClass().getSimpleName();
 
@@ -16,7 +16,7 @@ public class BusinessPresenter extends LocalBasePresenter<BusinessContract.IBusi
         //HashMap<String, Object> requestParamMap = new HashMap<>(paramMap);
 
         /*subscribeAsyncToResult(
-                HttpAPI.getInstance().httpService().init(paramMap),
+                BaseHttpAPI.getInstance().httpService().init(paramMap),
                 new BaseResultObserver<InitResult>() {
                     @Override
                     protected void onSuccess(InitResult result) {

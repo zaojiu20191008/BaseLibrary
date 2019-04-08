@@ -10,10 +10,21 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".modules.preference.DemoPreferenceActivity"
+        android:theme="@style/AppTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
         <activity android:name=".mvp.view.BusinessActivity">
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".kotlin.MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,16 +33,17 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".KeyboardActivity"
+                android:name=".modules.keyboard.KeyboardActivity"
                 android:label="@string/title_activity_keyboard"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

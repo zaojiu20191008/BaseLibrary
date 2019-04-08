@@ -1,8 +1,11 @@
 package com.niubility.library.http.base;
 
+import com.niubility.library.common.config.Config;
 import com.niubility.library.http.GsonExConverterFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -30,6 +33,45 @@ public class BaseRetrofit {
     private BaseRetrofit() {
     }
 
+
+
+    /** Map数组，数组下标对应环境配置的下标，Map里存放某个运行环境下的一个或多个Retrofit */
+    private ArrayList<Map<String, Retrofit>> retrofitMapList = new ArrayList<>();
+
+    /** Map数组，数组下标对应环境配置的下标，Map里存放某个运行环境下的一个或多个URL */
+    private ArrayList<Map<String, String>> urlMapList;
+
+    public ArrayList<Map<String, String>> getUrlMapList() {
+        if (urlMapList == null) {
+            urlMapList = new ArrayList<>();
+        }
+        return urlMapList;
+    }
+
+
+    private Map<String, Retrofit> currentEnvRetrofitMap;
+
+    /**
+     * 获取当前运行环境下URL对应的Retrofit
+     *
+     * @param urlKey URL的Key名
+     * @return
+     */
+    public Retrofit getCurrentEnvRetrofit(String urlKey) {
+
+        currentEnvRetrofitMap = retrofitMapList.get(Config.environment_index);
+
+        if (currentEnvRetrofitMap.containsKey(urlKey)) {
+            return currentEnvRetrofitMap.get(urlKey);
+        }
+
+        Retrofit retrofit = createrRetrofit(urlMapList.get(Config.environment_index).get(urlKey));
+        currentEnvRetrofitMap.put(urlKey, retrofit);
+        return retrofit;
+
+    }
+
+//====================================================================================
 
     /**
      * 获取retrofit的实例

@@ -14,7 +14,7 @@ public class BusinessContract {
 
     }
 
-    public interface IWaitPresenter extends LocalBaseContract.ILocalBasePresenter {
+    public interface IBusinessPresenter extends LocalBaseContract.ILocalBasePresenter {
 
         void request(Map<String, Object> paramMap);
 

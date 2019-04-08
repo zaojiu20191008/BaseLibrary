@@ -1,6 +1,9 @@
 package com.niubility.library.utils;
 
 import android.util.Log;
+import com.niubility.library.BuildConfig;
+import com.niubility.library.base.BaseApplication;
+import com.niubility.library.base.BaseMvpActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -10,18 +13,64 @@ import java.util.Locale;
 
 public class LogUtils {
 
-    public static final String TAG = LogUtils.class.getSimpleName();
+    private static final LogUtils ourInstance = new LogUtils();
+
+    public static LogUtils getInstance() {
+        return ourInstance;
+    }
+
+    private LogUtils() {
+    }
+
+
+    public String TAG = getClass().getSimpleName();
+
+    private boolean isShowLog = BuildConfig.DEBUG;
+
+    public boolean isShowLog() {
+        return isShowLog;
+    }
+
+    public void setShowLog(boolean showLog) {
+        isShowLog = showLog;
+    }
+
+
+    public void showILog(String tag, String content) {
+        if (isShowLog) {
+            Log.i(tag, content);
+        }
+    }
+
+    public void showILog(String content) {
+        showILog(TAG, content);
+    }
+
+    public void writeLogToFile(final String fileName, final String content) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                File targetFile = new File(MyApplication.logDir, fileName);
+//                FileUtils.writeToFile(targetFile, content,true);
+//            }
+//        }).start();
+
+        File targetFile = new File(BaseApplication.logDir, fileName);
+        FileUtils.writeToFile(targetFile, content.concat("\n"),true);
+    }
+
+
 
     /**清理间隔天数*/
-    public static int clearInterval = 7;
+    public int clearInterval = 7;
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
 
 
     /**
      * 获取格式化的log名称
      */
-    public static String getFormatFileName(String name) {
+    public String getFormatFileName(String name) {
         String day = sdf.format(new Date());
         return name + "-" + day + ".txt";
     }
@@ -30,7 +79,7 @@ public class LogUtils {
      * 清理日志
      * @param dir
      */
-    public static void autoClearInDir(File dir) {
+    public void autoClearInDir(File dir) {
         if(dir != null && dir.exists() && dir.isDirectory()) {
             File[] files = dir.listFiles();
             if(files != null) {
@@ -41,7 +90,7 @@ public class LogUtils {
         }
     }
 
-    public static void autoClear(File file) {
+    public void autoClear(File file) {
         if(file == null || !file.exists()) {
             return;
         }

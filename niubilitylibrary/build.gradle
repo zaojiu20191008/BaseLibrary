@@ -3,6 +3,16 @@ apply plugin: 'com.android.library'
 //apply plugin: 'com.jakewharton.butterknife'
 
 android {
+
+    signingConfigs {
+        EasygoConfig {
+            keyAlias 'com.easygo'
+            keyPassword 'ezgo123'
+            storeFile file('E:/Android/key/easygo.jks')
+            storePassword 'ezgo123'
+        }
+    }
+
     compileSdkVersion 28
 
     defaultConfig {
@@ -68,4 +78,6 @@ dependencies {
 
     //Preference
     implementation 'com.android.support:preference-v7:28.0.0'
+
+    implementation 'org.slf4j:slf4j-android:1.7.25'
 }

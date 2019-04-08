@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <header
+            android:fragment="com.niubility.demo.modules.preference.FirstPreferenceFragment"
+            android:icon="@drawable/increase"
+            android:title="@string/text_title_one"
+            android:summary="@string/text_summary_one"/>
+
+    <header
+            android:fragment="com.niubility.demo.modules.preference.SecondPreferenceFragment"
+            android:icon="@drawable/reduce"
+            android:title="@string/text_title_two"
+            android:summary="@string/text_summary_two"/>
+
+
+</preference-headers>

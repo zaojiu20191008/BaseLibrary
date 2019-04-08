@@ -16,7 +16,7 @@ import io.reactivex.observers.DisposableObserver;
 
 public abstract class BasePresenter<V extends BaseView> implements LifecycleObserver {
 
-    private static final String TAG = "BasePresenter";
+    public String TAG = getClass().getSimpleName();
 
     protected V mView;
 

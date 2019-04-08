@@ -170,7 +170,7 @@ public class HttpExceptionEngine {
 
         Log.i(TAG, content);
 
-        File file = new File(BaseApplication.logDir, LogUtils.getFormatFileName("interface"));
+        File file = new File(BaseApplication.logDir, LogUtils.getInstance().getFormatFileName("interface"));
         FileUtils.writeToFile(file, content, true);
 
         return result;

@@ -25,12 +25,12 @@ public class API {
 //
 //
 //
-//    public static HttpAPI getInstance() {
+//    public static BaseHttpAPI getInstance() {
 //        return Holder.sInstance;
 //    }
 //
 //    private static class Holder {
-//        private static HttpAPI sInstance = new HttpAPI();
+//        private static BaseHttpAPI sInstance = new BaseHttpAPI();
 //    }
 
 

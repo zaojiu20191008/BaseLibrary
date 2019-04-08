@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.preference.PreferenceCategory
+            android:title="@string/text_category_one">
+
+        <android.support.v7.preference.RingtonePreference
+                android:title="提示音ringtone"
+                android:summary="默认铃声"
+                android:key="key_preference_ringtone"
+                android:ringtoneType="ringtone"/>
+
+        <android.support.v7.preference.RingtonePreference
+                android:title="提示音alarm"
+                android:summary="默认铃声"
+                android:key="key_preference_alarm"
+                android:ringtoneType="alarm"/>
+
+        <android.support.v7.preference.RingtonePreference
+                android:title="提示音all"
+                android:summary="默认铃声"
+                android:key="key_preference_all"
+                android:ringtoneType="all"/>
+
+        <android.support.v7.preference.RingtonePreference
+                android:title="提示音notification"
+                android:summary="默认铃声"
+                android:key="key_preference_notification"
+                android:ringtoneType="notification"/>
+
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory android:title="@string/text_category_two">
+        <android.support.v7.preference.EditTextPreference
+                android:key="key_preference_et"
+                android:title="输入框"
+                android:summary="测试输入框"
+                android:dialogTitle="输入框弹窗标题："/>
+
+        <android.support.v7.preference.CheckBoxPreference
+                android:key="key_preference_cb"
+                android:title="可选选项"
+                android:summaryOn="选项：选中"
+                android:summaryOff="选项：取消"
+                android:defaultValue="true"/>
+
+        <android.support.v7.preference.SwitchPreferenceCompat
+                android:key="key_preference_switch"
+                android:title="开关选项"
+                android:summaryOn="选项：打开"
+                android:summaryOff="选项：关闭"
+                android:defaultValue="true"/>
+
+        <android.support.v7.preference.ListPreference
+                android:key="key_preference_list"
+                android:title="列表"
+                android:summary="测试列表"
+                android:dialogTitle="列表弹窗标题"
+                android:entries="@array/list_preference_options"
+                android:entryValues="@array/list_preference_options_values"/>
+
+        <android.support.v7.preference.MultiSelectListPreference
+                android:key="key_preference_multiList"
+                android:title="多选列表"
+                android:summary="测试多选列表"
+                android:dialogTitle="What does Weitao like to do?"
+                android:entries="@array/list_preference_options_mutil"
+                android:entryValues="@array/list_preference_options_mutil_values"/>
+
+
+    </android.support.v7.preference.PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>
