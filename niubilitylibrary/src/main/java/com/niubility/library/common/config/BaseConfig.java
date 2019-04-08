@@ -29,7 +29,7 @@ public class BaseConfig {
      */
     public static void readConfig(Context context) {
         SharedPreferences sp = context.getSharedPreferences(sp_config, Context.MODE_PRIVATE);
-        environment_index = Integer.valueOf(sp.getString(context.getString(R.string.key_environment), BuildConfig.DEBUG? "0": "2"));
+        environment_index = Integer.valueOf(sp.getString(context.getString(R.string.key_environment), BuildConfig.DEBUG? "2": "0"));
 
         environment_count = context.getResources().getStringArray(R.array.attr_environment).length;
 
