@@ -35,7 +35,7 @@ public abstract class BaseHttpAPI {
             for (int j = 0; j < urlKeyArray.length; j++) {
                 urlMapTemp.put(urlKeyArray[j], urlTwoDimensionArray[j][i]);
             }
-            urlMapListTemp.set(i, urlMapTemp);
+            urlMapListTemp.add(i, urlMapTemp);
         }
 
     }

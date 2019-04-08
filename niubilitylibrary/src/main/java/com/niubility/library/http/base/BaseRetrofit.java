@@ -34,7 +34,7 @@ public class BaseRetrofit {
 
 
     /** Map数组，数组下标对应环境配置的下标，Map里存放某个运行环境下的一个或多个Retrofit */
-    private ArrayList<Map<String, Retrofit>> retrofitMapList = new ArrayList<>();
+    private ArrayList<Map<String, Retrofit>> retrofitMapList;
 
     /** Map数组，数组下标对应环境配置的下标，Map里存放某个运行环境下的一个或多个URL */
     private ArrayList<Map<String, String>> urlMapList;
@@ -56,15 +56,24 @@ public class BaseRetrofit {
      * @return
      */
     public Retrofit getCurrentEnvRetrofit(String urlKey) {
+        if(retrofitMapList == null) {
+            retrofitMapList = new ArrayList<>();
+            for (int i = 0; i < BaseConfig.environment_count; i++) {
+                retrofitMapList.add(i, null);
+            }
+        }
 
         currentEnvRetrofitMap = retrofitMapList.get(BaseConfig.environment_index);
-
-        if (currentEnvRetrofitMap.containsKey(urlKey)) {
+        if(currentEnvRetrofitMap == null) {
+            currentEnvRetrofitMap = new HashMap<>();
+        }
+        else if (currentEnvRetrofitMap.containsKey(urlKey)) {
             return currentEnvRetrofitMap.get(urlKey);
         }
 
         Retrofit retrofit = createrRetrofit(urlMapList.get(BaseConfig.environment_index).get(urlKey));
         currentEnvRetrofitMap.put(urlKey, retrofit);
+        retrofitMapList.set(BaseConfig.environment_index, currentEnvRetrofitMap);
         return retrofit;
 
     }
