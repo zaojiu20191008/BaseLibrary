@@ -22,6 +22,7 @@
 
     <!--配置-->
     <string name="key_environment">key_environment</string>
+    <string name="key_ip_port">key_ip_port</string>
 
     <string-array name="attr_environment">
         <item>正式环境</item>

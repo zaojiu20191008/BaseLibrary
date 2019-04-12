@@ -1,6 +1,7 @@
 package com.niubility.library.common.config;
 
 import android.os.Bundle;
+import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -15,6 +16,7 @@ public class ConfigPreferenceFragment extends PreferenceFragmentCompat {
     public final String TAG = getClass().getSimpleName();
     public static final String mSharedPreferencesName = BaseConfig.sp_config;
     private ListPreference lp_environment;
+    private EditTextPreference et_ip;
 
 
     @Override
@@ -48,5 +50,17 @@ public class ConfigPreferenceFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+
+        et_ip = (EditTextPreference) findPreference(getString(R.string.key_ip_port));
+        et_ip.setSummary(et_ip.getText());
+        et_ip.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+
+                et_ip.setSummary((String) o);
+                return true;
+            }
+        });
+
     }
 }

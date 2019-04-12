@@ -23,6 +23,10 @@ public class BaseConfig {
      * 环境数量
      */
     public static int environment_count;
+    /**
+     * ip/port
+     */
+    public static String environment_ip;
 
     /**
      * 读取配置信息
@@ -32,6 +36,6 @@ public class BaseConfig {
         environment_index = Integer.valueOf(sp.getString(context.getString(R.string.key_environment), BuildConfig.DEBUG? "2": "0"));
 
         environment_count = context.getResources().getStringArray(R.array.attr_environment).length;
-
+        environment_ip = sp.getString(context.getString(R.string.key_ip_port), "192.168.1.1:8080");
     }
 }

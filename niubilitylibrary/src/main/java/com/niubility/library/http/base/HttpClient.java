@@ -34,9 +34,9 @@ public class HttpClient {
     private final OkHttpClient mLoginHeaderClient;
     private OkHttpClient mOkHttpClient;
 
-    private static final long DEFAULT_CONNECT_TIMEOUT = 10;
-    private static final long DEFAULT_WRITE_TIMEOUT  = 10;
-    private static final long DEFAULT_READ_TIMEOUT   = 10;
+    private static final long DEFAULT_CONNECT_TIMEOUT = 15;
+    private static final long DEFAULT_WRITE_TIMEOUT  = 15;
+    private static final long DEFAULT_READ_TIMEOUT   = 15;
     private final Interceptor mLoginInterceptor;
 
     /**

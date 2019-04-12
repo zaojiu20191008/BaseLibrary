@@ -15,6 +15,16 @@
 
     </ListPreference>
 
+    <EditTextPreference
+        android:title="Ip/Port"
+        android:key="@string/key_ip_port"
+        android:defaultValue="192.168.1.1:8080"
+        android:summary="点击填写"
+        android:icon="@drawable/ic_config"
+        android:dialogTitle="请填写ip/port"
+        />
+
+
 
 
 </PreferenceScreen>
