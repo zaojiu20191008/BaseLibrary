@@ -65,6 +65,10 @@ public class RxPermissionUtils {
                     }
                 }
             });
+        } else {
+            if (listener != null) {
+                listener.onCallback();
+            }
         }
     }
 }
