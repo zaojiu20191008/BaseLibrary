@@ -7,6 +7,7 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import android.util.Log;
 
 import com.niubility.library.http.base.HttpResult;
+import com.niubility.library.http.rx.Retry;
 import com.niubility.library.http.rx.Threadscheduler;
 import com.niubility.library.http.rx.TransformToResult;
 
@@ -37,19 +38,22 @@ public abstract class BasePresenter<V extends BaseView> implements LifecycleObse
     /**
      * 订阅，并将HttpResult中关键数据剥离出来
      */
-    public <T> void subscribeAsyncToResult(Observable<HttpResult<T>> observable, DisposableObserver<T> observer) {
-        observable.compose(new Threadscheduler<HttpResult<T>>())
+    public <T> void subscribeAsyncToResult(final Observable<HttpResult<T>> observable, DisposableObserver<T> observer) {
+        observable.retryWhen(new Retry<T>(1, 1000))
+                .compose(new Threadscheduler<HttpResult<T>>())
                 .map(new TransformToResult<T>())
                 .subscribe(observer);
 
         mCompositeDisposable.add(observer);
     }
 
+
     /**
      * 订阅
      */
     public <T> void subscribeAsync(Observable<T> observable, DisposableObserver<T> observer) {
-        observable.compose(new Threadscheduler<T>())
+        observable.retryWhen(new Retry<T>(1, 1000))
+                .compose(new Threadscheduler<T>())
                 .subscribe(observer);
 
         mCompositeDisposable.add(observer);

@@ -54,7 +54,6 @@ final class GsonResponseBody<T> implements Converter<ResponseBody, T> {
                     || return_code == 200) {
                 return gson.fromJson(response, type);
             } else {
-                Log.i("GsonResponseBody", result.toString());
                 ApiException resultException;
                 if(err_code != 200 && ret == 0 && return_code == 0) {
                     resultException = new ApiException(err_code, result.getErr_msg());
