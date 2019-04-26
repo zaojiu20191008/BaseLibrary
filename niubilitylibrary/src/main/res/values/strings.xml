@@ -21,6 +21,7 @@
 
 
     <!--配置-->
+    <string name="key_hide_preferences">key_hide_preferences</string>
     <string name="key_environment">key_environment</string>
     <string name="key_ip_port">key_ip_port</string>
 

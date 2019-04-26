@@ -5,8 +5,13 @@ import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.niubility.library.R;
+import com.niubility.library.utils.RegexUtils;
+
+import java.time.temporal.ValueRange;
 
 /**
  * 配置Fragment
@@ -17,6 +22,7 @@ public class ConfigPreferenceFragment extends PreferenceFragmentCompat {
     public static final String mSharedPreferencesName = BaseConfig.sp_config;
     private ListPreference lp_environment;
     private EditTextPreference et_ip;
+    private String ip_port;
 
 
     @Override
@@ -31,6 +37,7 @@ public class ConfigPreferenceFragment extends PreferenceFragmentCompat {
         super.onStart();
 
         setCurrentEnvironment();
+        setVisibility();
     }
 
     private void setCurrentEnvironment() {
@@ -52,15 +59,39 @@ public class ConfigPreferenceFragment extends PreferenceFragmentCompat {
         });
 
         et_ip = (EditTextPreference) findPreference(getString(R.string.key_ip_port));
-        et_ip.setSummary(et_ip.getText());
+        ip_port = et_ip.getText();
+        et_ip.setSummary(ip_port);
         et_ip.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
 
-                et_ip.setSummary((String) o);
+                String change = (String) o;
+                if(!TextUtils.isEmpty(ip_port) && !ip_port.equals(change)) {
+                    if(!RegexUtils.match(RegexUtils.regex_ip_port, change)) {
+                        Toast.makeText(getActivity(), "Ip/Port格式错误", Toast.LENGTH_LONG).show();
+                        return false;
+                    }
+                }
+
+                et_ip.setSummary(change);
+                ip_port = change;
                 return true;
             }
         });
 
+
+    }
+
+    public void setVisibility() {
+        if(BaseConfig.hideKeys == null) {
+            return;
+        }
+        Preference preference;
+        for (String key : BaseConfig.hideKeys) {
+            preference = findPreference(key);
+            if(preference != null) {
+                preference.setVisible(false);
+            }
+        }
     }
 }
