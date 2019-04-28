@@ -3,6 +3,8 @@ package com.niubility.library.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
+import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions2.Permission;
@@ -18,8 +20,10 @@ import io.reactivex.functions.Consumer;
  */
 public class RxPermissionUtils {
     /*
-     *   1. checkPermission();
-     *   2. setCallbackListener(); 若点击开启，执行操作
+     *   1. setCallbackListener(); 若点击开启，执行操作 或者 已经同意过的权限，执行操作
+     *   2. checkPermission();
+     *   TODO：(回调设置在checkPermission方法之前，当已经同意过的权限的检查速率大于设置监听的速率，
+     *   TODO：导致已经同意过的权限执行时并未设置回调 listener == null)
      */
     private static volatile RxPermissionUtils instance;
 
@@ -48,14 +52,14 @@ public class RxPermissionUtils {
      * Description：可一次性申请多个权限，权限申请和说明按对应顺序填写。
      */
     @SuppressLint("CheckResult")
-    public void checkPermission(final Activity activity, final String[] permissions, final String[] describe) {
+    public void checkPermission(final boolean isCallback, final Activity activity, final String[] permissions, final String[] describe) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             final RxPermissions rxPermissions = new RxPermissions(activity);
-            rxPermissions.requestEach(permissions).subscribe(new Consumer<Permission>() {
+            rxPermissions.requestEachCombined(permissions).subscribe(new Consumer<Permission>() {
                 @Override
                 public void accept(Permission permission) throws Exception {
                     if (permission.granted) {
-                        if (listener != null) {
+                        if (listener != null && isCallback) {
                             listener.onCallback();
                         }
                     } else if (permission.shouldShowRequestPermissionRationale) {
@@ -65,6 +69,10 @@ public class RxPermissionUtils {
                     }
                 }
             });
+        } else {
+            if (listener != null && isCallback) {
+                listener.onCallback();
+            }
         }
     }
 }
