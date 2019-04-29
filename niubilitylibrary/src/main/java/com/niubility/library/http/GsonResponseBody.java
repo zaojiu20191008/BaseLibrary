@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.niubility.library.http.base.HttpResult;
 import com.niubility.library.http.exception.ApiException;
+import com.niubility.library.utils.GsonUtils;
+import com.niubility.library.utils.LogUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -38,7 +40,15 @@ final class GsonResponseBody<T> implements Converter<ResponseBody, T> {
             Gson mGson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
                 @Override
                 public boolean shouldSkipField(FieldAttributes f) {
-                    return f.getName().equals("data");
+
+                    switch (f.getName()) {
+                        default:
+                            return false;
+                        case "result":
+                        case "data":
+                            return true;
+                    }
+//                    return f.getName().equals("data");
                 }
 
                 @Override
@@ -47,6 +57,7 @@ final class GsonResponseBody<T> implements Converter<ResponseBody, T> {
                 }
             }).create();
             HttpResult result = mGson.fromJson(response, HttpResult.class);
+
             int err_code = result.getErr_code();
             int ret = result.getRet();
             int return_code = result.getReturn_code();

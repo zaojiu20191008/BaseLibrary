@@ -50,24 +50,32 @@ public abstract class BaseDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View rootView = inflater.inflate(getLayoutId(), container, false);
+        View rootView = inflater.inflate(getLayoutId(), container, true);
         if (rootView == null) {
             return null;
         }
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        rootView.setLayoutParams(layoutParams);
+//        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+//                ViewGroup.LayoutParams.WRAP_CONTENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT);
+//        rootView.setLayoutParams(layoutParams);
         initView(rootView);
         final Window window = getDialog().getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             window.getDecorView().setPadding(0, 0, 0, 0);
             WindowManager.LayoutParams params = window.getAttributes();
-            params.width = isWindowWidthMatchParent() ?
-                    WindowManager.LayoutParams.MATCH_PARENT :
-                    WindowManager.LayoutParams.WRAP_CONTENT;
-            params.height = shouldMatchHeight() ? mDialogHeight : WindowManager.LayoutParams.WRAP_CONTENT;
+
+            params.systemUiVisibility = getSystemUiVisibility();
+
+            if (getLayoutWidth() == 0 || getLayoutHeight() == 0) {
+                params.width = isWindowWidthMatchParent() ?
+                        WindowManager.LayoutParams.MATCH_PARENT :
+                        WindowManager.LayoutParams.WRAP_CONTENT;
+                params.height = shouldMatchHeight() ?
+                        mDialogHeight : WindowManager.LayoutParams.WRAP_CONTENT;
+            } else {
+                window.setLayout(getLayoutWidth(), getLayoutHeight());
+            }
             if (!mIsCenter) {
                 params.gravity = Gravity.TOP | Gravity.LEFT;
                 computePosition(rootView);
@@ -184,6 +192,7 @@ public abstract class BaseDialog extends DialogFragment {
 
     public void hideDialog() {
         mIsClosing = true;
+        mIsShowDialog = false;
         if (isShowing()) {
             dismissAllowingStateLoss();
         }
@@ -290,6 +299,30 @@ public abstract class BaseDialog extends DialogFragment {
      */
     abstract protected int getLayoutId();
 
+
+    /**
+     * 获取布局宽度
+     *
+     * @return
+     */
+    abstract protected int getLayoutWidth();
+
+
+    /**
+     * 获取布局高度
+     *
+     * @return
+     */
+    abstract protected int getLayoutHeight();
+
+
+    /**
+     * 获取窗口设定值
+     *
+     * @return
+     */
+    abstract protected int getSystemUiVisibility();
+
     /**
      * 获取动画资源
      *
@@ -318,5 +351,6 @@ public abstract class BaseDialog extends DialogFragment {
      * @return
      */
     abstract protected boolean isWindowWidthMatchParent();
+
 
 }

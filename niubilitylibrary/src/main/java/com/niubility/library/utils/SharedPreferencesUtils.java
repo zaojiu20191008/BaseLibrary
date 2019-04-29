@@ -14,6 +14,7 @@ public class SharedPreferencesUtils {
     /** 变量/常量说明 */
     public static final String PREFERENCE_NAME = "BaseConfig";
     private SharedPreferences mSharedPreference;
+    private SharedPreferences.Editor editor;
 
     public static SharedPreferencesUtils getInstance() {
         return Holder.sInstance;
@@ -32,4 +33,26 @@ public class SharedPreferencesUtils {
             mSharedPreference = PreferenceManager.getDefaultSharedPreferences(context);
         return mSharedPreference;
     }
+
+
+    public void addSharedPreferenceLong(Context context, String key, long value) {
+
+        if (mSharedPreference == null) {
+            getSharedPreferences(context);
+        }
+        if (editor == null) {
+            editor = mSharedPreference.edit();
+        }
+        editor.putLong(key, value);
+        editor.apply();
+    }
+
+    public long getSharedPreferenceLong(Context context, String key, long defaultValue) {
+
+        if (mSharedPreference == null) {
+            getSharedPreferences(context);
+        }
+        return mSharedPreference.getLong(key, defaultValue);
+    }
+
 }
