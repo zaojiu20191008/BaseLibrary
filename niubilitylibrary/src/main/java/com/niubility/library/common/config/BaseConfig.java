@@ -16,6 +16,11 @@ public class BaseConfig {
     public static final String sp_config = "BaseConfig";
 
     /**
+     * 需要隐藏的preference的key值
+     */
+    public static String[] hideKeys;
+
+    /**
      * 环境变量指示变量
      */
     public static int environment_index;
