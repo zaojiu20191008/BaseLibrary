@@ -23,6 +23,8 @@ import android.view.WindowManager;
 
 import com.niubility.library.utils.ScreenUtils;
 
+import java.util.LinkedList;
+
 public abstract class BaseDialog extends DialogFragment {
 
     private int x;
@@ -38,6 +40,8 @@ public abstract class BaseDialog extends DialogFragment {
     private boolean mIsBottom;
     private int mDialogHeight;
     private boolean mCanCanceledOnTouchOutside;
+    private DialogInterface.OnDismissListener mOnDismissListener;
+    private LinkedList<Runnable> mTaskLinkedLists = new LinkedList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,24 +54,35 @@ public abstract class BaseDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View rootView = inflater.inflate(getLayoutId(), container, false);
+        View rootView = inflater.inflate(getLayoutId(), container, true);
         if (rootView == null) {
             return null;
         }
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        rootView.setLayoutParams(layoutParams);
+//        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+//                ViewGroup.LayoutParams.WRAP_CONTENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT);
+//        rootView.setLayoutParams(layoutParams);
         initView(rootView);
         final Window window = getDialog().getWindow();
         if (window != null) {
+            if(isHideNavigationBar()) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+            }
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             window.getDecorView().setPadding(0, 0, 0, 0);
             WindowManager.LayoutParams params = window.getAttributes();
-            params.width = isWindowWidthMatchParent() ?
-                    WindowManager.LayoutParams.MATCH_PARENT :
-                    WindowManager.LayoutParams.WRAP_CONTENT;
-            params.height = shouldMatchHeight() ? mDialogHeight : WindowManager.LayoutParams.WRAP_CONTENT;
+
+            params.systemUiVisibility = getSystemUiVisibility();
+
+            if (getLayoutWidth() == 0 || getLayoutHeight() == 0) {
+                params.width = isWindowWidthMatchParent() ?
+                        WindowManager.LayoutParams.MATCH_PARENT :
+                        WindowManager.LayoutParams.WRAP_CONTENT;
+                params.height = shouldMatchHeight() ?
+                        mDialogHeight : WindowManager.LayoutParams.WRAP_CONTENT;
+            } else {
+                window.setLayout(getLayoutWidth(), getLayoutHeight());
+            }
             if (!mIsCenter) {
                 params.gravity = Gravity.TOP | Gravity.LEFT;
                 computePosition(rootView);
@@ -106,6 +121,32 @@ public abstract class BaseDialog extends DialogFragment {
         super.onResume();
         if (mIsClosing) {
             dismiss();
+        }
+        //执行任务
+        while (mTaskLinkedLists.size() > 0) {
+            mTaskLinkedLists.remove(0).run();
+        }
+        if(isHideNavigationBar()) {
+            final Window window = getDialog().getWindow();
+            if(window != null) {
+                int ui_options = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+                window.getDecorView().setSystemUiVisibility(ui_options);
+
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+            }
+        }
+    }
+
+    /**
+     * 添加任务，dialog显示时直接执行，否则回调onResume()时执行
+     */
+    public void addTask(Runnable runnable) {
+        if(runnable != null) {
+            if (isShowing()) {
+                runnable.run();
+            } else {
+                mTaskLinkedLists.add(runnable);
+            }
         }
     }
 
@@ -184,6 +225,7 @@ public abstract class BaseDialog extends DialogFragment {
 
     public void hideDialog() {
         mIsClosing = true;
+        mIsShowDialog = false;
         if (isShowing()) {
             dismissAllowingStateLoss();
         }
@@ -202,6 +244,9 @@ public abstract class BaseDialog extends DialogFragment {
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         mIsShowDialog = false;
+        if(mOnDismissListener != null) {
+            mOnDismissListener.onDismiss(dialog);
+        }
     }
 
     private FragmentTransaction prepareFragmentTransaction(FragmentActivity activity, String tag) {
@@ -272,8 +317,16 @@ public abstract class BaseDialog extends DialogFragment {
      *
      * @return false:isHidden  true:isShowing
      */
-    protected boolean isShowing() {
+    public boolean isShowing() {
         return this.getDialog() != null && this.getDialog().isShowing();
+    }
+
+    /**
+     * 对话框取消监听
+     *
+     */
+    public void setOnDismissListener(DialogInterface.OnDismissListener listener) {
+        this.mOnDismissListener = listener;
     }
 
     /**
@@ -289,6 +342,30 @@ public abstract class BaseDialog extends DialogFragment {
      * @return
      */
     abstract protected int getLayoutId();
+
+
+    /**
+     * 获取布局宽度
+     *
+     * @return
+     */
+    abstract protected int getLayoutWidth();
+
+
+    /**
+     * 获取布局高度
+     *
+     * @return
+     */
+    abstract protected int getLayoutHeight();
+
+
+    /**
+     * 获取窗口设定值
+     *
+     * @return
+     */
+    abstract protected int getSystemUiVisibility();
 
     /**
      * 获取动画资源
@@ -318,5 +395,12 @@ public abstract class BaseDialog extends DialogFragment {
      * @return
      */
     abstract protected boolean isWindowWidthMatchParent();
+
+    /**
+     * 是否隐藏导航栏
+     *
+     * @return
+     */
+    abstract protected boolean isHideNavigationBar();
 
 }

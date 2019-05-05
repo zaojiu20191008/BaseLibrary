@@ -18,15 +18,6 @@ public abstract class LocalBaseMvpActivity<V extends LocalBaseContract.ILocalBas
         super.onCreate(savedInstanceState);
     }
 
-    private long lastClick = 0;
-
-    public boolean fastClick() {
-        if (System.currentTimeMillis() - lastClick <= 1000) {
-            return true;
-        }
-        lastClick = System.currentTimeMillis();
-        return false;
-    }
 
 
     public void toast(String content) {

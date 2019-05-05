@@ -11,7 +11,7 @@ public class HttpsAPI extends BaseHttpAPI {
 
     private static final HttpsAPI ourInstance = new HttpsAPI();
 
-    static HttpsAPI getInstance() {
+    public static HttpsAPI getInstance() {
         return ourInstance;
     }
 
@@ -37,9 +37,9 @@ public class HttpsAPI extends BaseHttpAPI {
 
         if (httpServiceStoreList == null) {
             httpServiceStoreList = new ArrayList<>();
-            httpServiceStoreList.set(0, null);
-            httpServiceStoreList.set(1, null);
-            httpServiceStoreList.set(2, null);
+            for (int i = 0; i < BaseConfig.environment_count; i++) {
+                httpServiceStoreList.add(i, null);
+            }
         }
 
         httpServiceStore = httpServiceStoreList.get(BaseConfig.environment_index);
@@ -64,9 +64,9 @@ public class HttpsAPI extends BaseHttpAPI {
 
         if (httpServiceVipList == null) {
             httpServiceVipList = new ArrayList<>();
-            httpServiceVipList.set(0, null);
-            httpServiceVipList.set(1, null);
-            httpServiceVipList.set(2, null);
+            for (int i = 0; i < BaseConfig.environment_count; i++) {
+                httpServiceVipList.add(i, null);
+            }
         }
 
         httpService_vip = httpServiceVipList.get(BaseConfig.environment_index);
@@ -117,13 +117,13 @@ public class HttpsAPI extends BaseHttpAPI {
     protected String[][] getUrlArray() {
 
         String[] array_url_store = new String[] {
-                "https://api.store.ieasygo.cn/", //正式
+                "https://api.store.ieasygo.cn", //正式
                 "https://staging.api.store.ieasygo.cn", //预发布
                 "https://dev.api.store.ieasygo.cn", //测试
         };
 
         String[] array_url_vip = new String[] {
-                "https://api.vip.ieasygo.cn/",
+                "https://api.vip.ieasygo.cn",
                 "https://staging.api.vip.ieasygo.cn",
                 "https://dev.api.vip.ieasygo.cn",
         };

@@ -121,7 +121,7 @@ public class HttpExceptionEngine {
                         err_msg = result.getErr_msg();
                     }
                 }
-            } catch (IOException e1) {
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
             if(err_code == Error.UNKNOWN) {

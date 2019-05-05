@@ -19,6 +19,7 @@ public class TransformToResult<T> implements Function<HttpResult<T>, T> {
         if(!httpResult.isSuccessful()) {
             throw new ApiException(httpResult.getErr_code(), httpResult.getErr_msg());
         }
-        return httpResult.getResult();
+
+        return httpResult.getResult() == null? httpResult.getData(): httpResult.getResult();
     }
 }

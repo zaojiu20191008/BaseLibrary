@@ -2,11 +2,13 @@ package com.niubility.library.widget.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -44,6 +46,9 @@ public class DotLoadingDialog extends Dialog {
         Window window = this.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.gravity = 17;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            params.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        }
         window.setAttributes(params);
         this.mLoadingDot1 = (ImageView)this.findViewById(R.id.loading_dot1);
         this.mLoadingDot2 = (ImageView)this.findViewById(R.id.loading_dot2);
