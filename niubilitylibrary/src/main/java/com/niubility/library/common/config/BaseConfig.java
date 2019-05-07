@@ -44,6 +44,13 @@ public class BaseConfig {
         environment_ip = sp.getString(context.getString(R.string.key_ip_port), "192.168.1.1:8080");
     }
 
+    /**
+     * 设置环境
+     */
+    public static void setEnvironmentIndex(Context context, String index) {
+        SharedPreferences sp = context.getSharedPreferences(sp_config, Context.MODE_PRIVATE);
+        sp.edit().putString(context.getString(R.string.key_environment), index).apply();
+    }
 
     /**
      * 设置IP和端口
