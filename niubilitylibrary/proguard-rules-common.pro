@@ -21,6 +21,12 @@
 #-renamesourcefileattribute SourceFile
 
 
+############################################################################################################
+############################################################################################################
+###########################      基础通用       #############################################################
+############################################################################################################
+############################################################################################################
+
 # 指定代码的压缩级别
 -optimizationpasses 5
 
@@ -200,12 +206,21 @@
 -keep class org.apache.http.** { *;}
 
 
+# 移除Log类打印各个等级日志的代码，打正式包的时候可以做为禁log使用，这里可以作为禁止log打印的功能使用
+# 记得proguard-android.txt中一定不要加-dontoptimize才起作用
+# 另外的一种实现方案是通过BuildConfig.DEBUG的变量来控制
+#-assumenosideeffects class android.util.Log {
+#    public static int v(...);
+#    public static int i(...);
+#    public static int w(...);
+#    public static int d(...);
+#    public static int e(...);
+#}
+
 
 ############################################################################################################
 ############################################################################################################
-
-#   第三方库
-
+###########################      第三方库       #############################################################
 ############################################################################################################
 ############################################################################################################
 
@@ -241,10 +256,13 @@
 # https://github.com/bumptech/glide
 -dontwarn  com.bumptech.**
 -keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
     **[] $VALUES;
     public *;
 }
+# for DexGuard only
+#-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 # >>>>>>>>>>>>>>>>>>>>>>>>  Glide  End >>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -346,6 +364,7 @@
 
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode producerNode;
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
@@ -375,6 +394,19 @@
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
 -keep class okio.** {*;}
+
+# JSR 305 annotations are for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# A resource is loaded with a relative path so the package of this class must be preserved.
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# OkHttp platform used only on JVM and when Conscrypt dependency is available.
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+
 # >>>>>>>>>>>>>>>>>>>>>>>>  OkHttp  End >>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -402,6 +434,37 @@
     @retrofit2.http.* <methods>;
 }
 
+
+
+# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
+# EnclosingMethod is required to use InnerClasses.
+-keepattributes Signature, InnerClasses, EnclosingMethod
+
+# Retrofit does reflection on method and parameter annotations.
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+
+# Retain service method parameters when optimizing.
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+
+# Ignore annotation used for build tooling.
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# Ignore JSR 305 annotations for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
+-dontwarn kotlin.Unit
+
+# Top-level functions that can only be used by Kotlin.
+-dontwarn retrofit2.KotlinExtensions
+
+# With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy
+# and replaces all potential values with null. Explicitly keeping the interfaces prevents this.
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
+
 # >>>>>>>>>>>>>>>>>>>>>>>>  Retrofit2  End >>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -428,6 +491,21 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>  Butterknife  End >>>>>>>>>>>>>>>>>>>>>>>>
 
 
+# >>>>>>>>>>>>>>>>>>>>>>>>  xUtils  Start >>>>>>>>>>>>>>>>>>>>>>>>
+ -keep class com.lidroid.** { *; }
+# >>>>>>>>>>>>>>>>>>>>>>>>  xUtils  End >>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>  BaseRecyclerViewAdapterHelper  Start >>>>>>>>>>>>>>>>>>>>>>>>
+-keep class com.chad.library.adapter.** { *; }
+-keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
+-keep public class * extends com.chad.library.adapter.base.BaseViewHolder
+-keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
+     <init>(...);
+}
+# >>>>>>>>>>>>>>>>>>>>>>>>  BaseRecyclerViewAdapterHelper  End >>>>>>>>>>>>>>>>>>>>>>>>
+
+
 # >>>>>>>>>>>>>>>>>>>>>>>>  Bugly  Start >>>>>>>>>>>>>>>>>>>>>>>>
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
@@ -435,6 +513,19 @@
 -dontwarn com.tencent.tinker.**
 -keep class com.tencent.tinker.** { *; }
 # >>>>>>>>>>>>>>>>>>>>>>>>  Bugly  End >>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>  Arouter  Start >>>>>>>>>>>>>>>>>>>>>>>>
+-keep public class com.alibaba.android.arouter.routes.**{*;}
+-keep public class com.alibaba.android.arouter.facade.**{*;}
+-keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
+
+# If you use the byType method to obtain Service, add the following rules to protect the interface:
+-keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
+
+# If single-type injection is used, that is, no interface is defined to implement IProvider, the following rules need to be added to protect the implementation
+# -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
+# >>>>>>>>>>>>>>>>>>>>>>>>  Arouter  End >>>>>>>>>>>>>>>>>>>>>>>>
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>>  热修复框架rocoofix  Start >>>>>>>>>>>>>>>>>>>>>>>>
@@ -522,12 +613,9 @@
 -keep class com.nineoldandroids.** {*;}
 
 
-
 ############################################################################################################
 ############################################################################################################
-
-#   app
-
+###########################      app       #################################################################
 ############################################################################################################
 ############################################################################################################
 
