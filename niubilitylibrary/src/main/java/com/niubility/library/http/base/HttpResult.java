@@ -22,7 +22,7 @@ public class HttpResult<T> implements Serializable {
 
 
     public boolean isSuccessful() {
-        return err_code == 200 || return_code == 200;
+        return err_code == 200 || return_code == 200 || ret == 200;
     }
 
     public int getErr_code() {
