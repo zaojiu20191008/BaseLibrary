@@ -1,15 +1,11 @@
 package com.niubility.library.http;
 
-import android.util.Log;
-
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.niubility.library.http.base.HttpResult;
+import com.niubility.library.http.base.IHttpResult;
 import com.niubility.library.http.exception.ApiException;
-import com.niubility.library.utils.GsonUtils;
-import com.niubility.library.utils.LogUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -56,25 +52,14 @@ final class GsonResponseBody<T> implements Converter<ResponseBody, T> {
                     return false;
                 }
             }).create();
-            HttpResult result = mGson.fromJson(response, HttpResult.class);
+            //预解析，判断业务是否成功
+            IHttpResult result = mGson.fromJson(response, type);
 
-            int err_code = result.getErr_code();
-            int ret = result.getRet();
-            int return_code = result.getReturn_code();
-            if ((err_code == 200) || (ret == 200)
-                    || return_code == 200) {
+            int code = result.code();
+            if (result.isSuccessful()) {
                 return gson.fromJson(response, type);
             } else {
-                ApiException resultException;
-                if(err_code != 200 && ret == 0 && return_code == 0) {
-                    resultException = new ApiException(err_code, result.getErr_msg());
-                } else if(err_code == 0 && ret != 200 && return_code == 0) {
-                    resultException = new ApiException(ret,
-                            result.getErr_msg() != null ? result.getErr_msg() : result.getError_msg());
-                } else {
-                    resultException = new ApiException(return_code, result.getReturn_msg());
-                }
-                throw resultException;
+                throw new ApiException(code, result.msg());
             }
         } finally {
             value.close();

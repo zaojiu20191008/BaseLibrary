@@ -4,9 +4,8 @@ import android.net.ParseException;
 import android.util.Log;
 
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 import com.niubility.library.base.BaseApplication;
-import com.niubility.library.http.base.HttpResult;
+import com.niubility.library.http.result.HttpResult;
 import com.niubility.library.utils.FileUtils;
 import com.niubility.library.utils.GsonUtils;
 import com.niubility.library.utils.LogUtils;
@@ -14,7 +13,6 @@ import com.niubility.library.utils.LogUtils;
 import org.json.JSONException;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -117,8 +115,8 @@ public class HttpExceptionEngine {
                     String response = responseBody.string();
                     HttpResult result = GsonUtils.getInstance().getGson().fromJson(response, HttpResult.class);
                     if (result != null) {
-                        err_code = result.getErr_code();
-                        err_msg = result.getErr_msg();
+                        err_code = result.code();
+                        err_msg = result.msg();
                     }
                 }
             } catch (Exception e1) {

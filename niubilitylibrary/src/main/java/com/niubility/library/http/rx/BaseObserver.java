@@ -1,6 +1,6 @@
 package com.niubility.library.http.rx;
 
-import com.niubility.library.http.base.HttpResult;
+import com.niubility.library.http.base.IHttpResult;
 import com.niubility.library.http.exception.ApiException;
 import com.niubility.library.http.exception.HttpExceptionEngine;
 
@@ -10,15 +10,15 @@ import java.util.Map;
  * 通用处理HttpResult逻辑
  * @param <T>
  */
-public abstract class BaseObserver<T> extends BaseErrorObserver<HttpResult<T>> {
+public abstract class BaseObserver<T> extends BaseErrorObserver<IHttpResult<T>> {
 
     @Override
-    public void onNext(HttpResult<T> httpResult) {
+    public void onNext(IHttpResult<T> httpResult) {
         if(httpResult.isSuccessful()) {
             onSuccess(httpResult);
         } else {
             //-----------------业务逻辑错误---------------------
-            throw new ApiException(httpResult.getErr_code(), httpResult.getErr_msg());
+            throw new ApiException(httpResult.code(), httpResult.msg());
         }
     }
 
@@ -38,7 +38,7 @@ public abstract class BaseObserver<T> extends BaseErrorObserver<HttpResult<T>> {
 
     }
 
-    protected abstract void onSuccess(HttpResult<T> httpResult);
+    protected abstract void onSuccess(IHttpResult<T> httpResult);
 //    protected abstract void onFailure(String msg);
     protected abstract void onFailure(Map<String, Object> map);
 

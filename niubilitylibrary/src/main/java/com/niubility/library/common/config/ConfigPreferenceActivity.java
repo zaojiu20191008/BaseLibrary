@@ -4,8 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.niubility.library.R;
+import com.niubility.library.base.BaseApplication;
+import com.niubility.library.base.BaseDialog;
+import com.niubility.library.utils.ToastUtils;
 
 /**
  * 配置Activity
@@ -25,8 +29,8 @@ public class ConfigPreferenceActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         BaseConfig.readConfig(ConfigPreferenceActivity.this);
     }
 }
