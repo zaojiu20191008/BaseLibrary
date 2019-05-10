@@ -1,18 +1,19 @@
 # Built application files
 *.apk
-*.ap_
-*.aab
+#*.ap_
+debug/
+release/
 
 # Files for the ART/Dalvik VM
 *.dex
 
 # Java class files
-*.class
+#*.class
 
 # Generated files
 bin/
 gen/
-out/
+#out/
 
 # Gradle files
 .gradle/
@@ -25,7 +26,7 @@ local.properties
 proguard/
 
 # Log Files
-*.log
+#*.log
 
 # Android Studio Navigation editor temp files
 .navigation/
@@ -35,20 +36,11 @@ captures/
 
 # IntelliJ
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/assetWizardSettings.xml
-.idea/dictionaries
-.idea/libraries
-.idea/caches
-.idea/vcs.xml
-.idea/modules.xml
+.idea/
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
 #*.jks
-#*.keystore
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
@@ -68,16 +60,12 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 
-# Version control
-vcs.xml
-
 # lint
 lint/intermediates/
 lint/generated/
 lint/outputs/
 lint/tmp/
-# lint/reports/
+#lint/reports/
 
-#####
+#
 .DS_Store
-.externalNativeBuild/
