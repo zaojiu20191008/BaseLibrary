@@ -60,11 +60,11 @@ public class HttpClient {
             }
         });
 
-//        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        }else {
-//            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
-//        }
+        }else {
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+        }
 
 
         //可统一添加请求头
