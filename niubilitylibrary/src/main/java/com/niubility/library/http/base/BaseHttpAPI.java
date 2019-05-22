@@ -12,6 +12,10 @@ public abstract class BaseHttpAPI {
     protected String[][] array_url;
 
     protected BaseHttpAPI() {
+        init();
+    }
+
+    public void init() {
         array_key_url = getUrlKeyArray();
         array_url = getUrlArray();
 
@@ -26,6 +30,8 @@ public abstract class BaseHttpAPI {
     public void init(String[] urlKeyArray, String[]... urlTwoDimensionArray) {
 
         ArrayList<Map<String, String>> urlMapListTemp = BaseRetrofit.getInstance().getUrlMapList();
+
+        BaseRetrofit.getInstance().reset();
 
         /**用来存储某一环境下的一个或多个域名*/
         HashMap<String, String> urlMapTemp;

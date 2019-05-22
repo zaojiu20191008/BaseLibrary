@@ -109,7 +109,12 @@ public class BaseRetrofit {
                 .build();
     }
 
-
+    public void reset() {
+        mRetrofitHashMap.clear();
+        urlMapList.clear();
+        retrofitMapList = null;
+        currentEnvRetrofitMap = null;
+    }
 
 
 }
