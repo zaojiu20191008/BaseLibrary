@@ -18,26 +18,28 @@ public class ToastUtils {
     public static int xOffset = 0;
     public static int yOffset = 0;
 
-    public static void showToast(Context context, String res){
-        if (TextUtils.isEmpty(res)){
+    public static void showToast(Context context, String res) {
+        if (TextUtils.isEmpty(res)) {
             return;
         }
-        if (mToast != null){
+        if (mToast != null) {
             mToast.cancel();
         }
-        mToast = Toast.makeText(context,res, Toast.LENGTH_LONG);
+        mToast = Toast.makeText(context, null, Toast.LENGTH_LONG);
+        mToast.setText(res);//解决MIUI系统 toast显示应用名的问题
         LinearLayout view = (LinearLayout) mToast.getView();
         TextView v = (TextView) view.getChildAt(0);
         v.setTextSize(TypedValue.COMPLEX_UNIT_PX, v.getTextSize() * text_size_times);
         mToast.setGravity(gravity, xOffset, yOffset);
         mToast.show();
     }
-    public static void showToast(Context context,int resId){
-        showToast(context,context.getString(resId));
+
+    public static void showToast(Context context, int resId) {
+        showToast(context, context.getString(resId));
     }
 
-    public static void showToast(Context context,int resId,int errorCode){
-        showToast(context,context.getString(resId)+":"+String.valueOf(errorCode));
+    public static void showToast(Context context, int resId, int errorCode) {
+        showToast(context, context.getString(resId) + ":" + String.valueOf(errorCode));
     }
 
 
