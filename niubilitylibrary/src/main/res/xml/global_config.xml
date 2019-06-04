@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference android:title="全局配置" />
+    <Preference
+        android:title="全局配置"
+        android:key="@string/key_config_return"
+        android:icon="@drawable/ic_ret"/>
 
     <ListPreference
         android:title="环境配置"

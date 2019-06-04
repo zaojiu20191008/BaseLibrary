@@ -20,6 +20,7 @@ public class ConfigPreferenceFragment extends PreferenceFragmentCompat {
 
     public final String TAG = getClass().getSimpleName();
     public static final String mSharedPreferencesName = BaseConfig.sp_config;
+    private Preference preference_config_return;
     private ListPreference lp_environment;
     private EditTextPreference et_ip;
     private String ip_port;
@@ -29,6 +30,16 @@ public class ConfigPreferenceFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle bundle, String s) {
         getPreferenceManager().setSharedPreferencesName(mSharedPreferencesName);
         addPreferencesFromResource(R.xml.global_config);
+
+        preference_config_return = findPreference(getString(R.string.key_config_return));
+        preference_config_return.setOnPreferenceClickListener(
+                new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                getActivity().finish();
+                return false;
+            }
+        });
 
     }
 

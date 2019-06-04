@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="@dimen/x740"
+        android:layout_height="@dimen/y384"
+        android:background="@drawable/bg_dialog_like_toast">
+
+    <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_kindly_reminder"
+            android:textSize="@dimen/x46"
+            android:textColor="@color/color_AAAAAA"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/y80"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y4"
+            android:background="@color/color_DDDDDD"
+            android:layout_marginEnd="@dimen/x20"
+            app:layout_constraintTop_toTopOf="@id/tv_tips"
+            app:layout_constraintBottom_toBottomOf="@id/tv_tips"
+            app:layout_constraintEnd_toStartOf="@id/tv_tips"/>
+
+    <View
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y4"
+            android:background="@color/color_DDDDDD"
+            android:layout_marginStart="@dimen/x20"
+            app:layout_constraintTop_toTopOf="@id/tv_tips"
+            app:layout_constraintBottom_toBottomOf="@id/tv_tips"
+            app:layout_constraintStart_toEndOf="@id/tv_tips"/>
+
+    <TextView
+            android:id="@+id/tv_error_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_error_code"
+            android:textSize="@dimen/x32"
+            android:textColor="@color/color_EEEEEE"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginEnd="@dimen/x30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+            android:id="@+id/tv_error_message"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y104"
+            android:text="@string/text_error_message"
+            android:textSize="@dimen/x40"
+            android:textColor="@color/color_333333"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/y54"
+            android:layout_marginStart="@dimen/x50"
+            android:layout_marginEnd="@dimen/x50"
+            app:layout_constraintTop_toBottomOf="@id/tv_tips"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</android.support.constraint.ConstraintLayout>

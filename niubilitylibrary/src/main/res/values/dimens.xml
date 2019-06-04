@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="width_dialog_like_toast">@dimen/x740</dimen>
+    <dimen name="height_dialog_like_toast">@dimen/y384</dimen>
+
+    <dimen name="width_dialog_code">@dimen/x620</dimen>
+    <dimen name="height_dialog_code">@dimen/y780</dimen>
+
+</resources>
