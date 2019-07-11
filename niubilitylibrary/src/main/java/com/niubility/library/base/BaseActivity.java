@@ -6,11 +6,14 @@ import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
 import com.niubility.library.BuildConfig;
+import com.niubility.library.R;
 import com.niubility.library.mvp.BaseView;
 import com.niubility.library.utils.ToastUtils;
 
@@ -69,7 +72,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
      * @param logTitle
      * @param logContent
      */
-    public void showLog (String logTitle, String logContent) {
+    public void showLog(String logTitle, String logContent) {
         if (BuildConfig.DEBUG) {
             Log.i(logTitle, logContent);
         }
@@ -80,10 +83,10 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
      *
      * @param logContent
      */
-    public void showLog (String logContent) {
+    public void showLog(String logContent) {
         showLog(TAG, logContent);
     }
-    
+
 
     @Override
     public void showToast(String msg) {
@@ -151,9 +154,9 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
     }
 
     public boolean isFocus() {
-       return true;
+        return true;
     }
-    
+
 
     /* 最后一次点击的时间 */
     private long lastClick = 0;
@@ -177,7 +180,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
      * 可选函数，在设定的有效时间内，连续点击达到设定的次数才返回 true
      * 常用于 onClick 点击事件中
      *
-     * @param clickCount 连续点击的次数
+     * @param clickCount    连续点击的次数
      * @param effectiveTime 连续点击的有效时间
      * @return
      */
@@ -219,12 +222,9 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
      *
      * @return
      */
-    public boolean continuousClick () {
+    public boolean continuousClick() {
         return continuousClick(hitCounts, hitEffectiveTime);
     }
-
-
-
 
 
 //    @Override
@@ -249,5 +249,26 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
 //        return super.dispatchKeyEvent(event);
 //    }
 
+    private long firstTime = 0;
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (isBack()) {
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+                long secondTime = System.currentTimeMillis();
+                if (secondTime - firstTime > 2000) {
+                    firstTime = secondTime;
+                    showToast(getString(R.string.text_end_program));
+                    return true;
+                } else {
+                    finish();
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public boolean isBack() {
+        return false;
+    }
 }

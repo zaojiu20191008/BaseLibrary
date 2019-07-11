@@ -25,7 +25,7 @@ public class ToastUtils {
         if (mToast != null) {
             mToast.cancel();
         }
-        mToast = Toast.makeText(context, null, Toast.LENGTH_LONG);
+        mToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
         mToast.setText(res);//解决MIUI系统 toast显示应用名的问题
         LinearLayout view = (LinearLayout) mToast.getView();
         TextView v = (TextView) view.getChildAt(0);

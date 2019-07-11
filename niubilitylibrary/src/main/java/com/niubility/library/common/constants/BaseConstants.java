@@ -4,12 +4,14 @@ public class BaseConstants {
 
     public static final String KEY_SHOP_SN = "key_shop_sn";
     public static final String KEY_SHOP_NAME = "key_shop_name";
+    public static final String KEY_ADMIN_USERNAME = "key_admin_username";
     public static final String KEY_ADMIN_NAME = "key_admin_name";
     public static final String KEY_SESSION_ID = "key_session_id";
     public static final String KEY_TIME = "key_time";
     public static final String KEY_APPKEY = "key_appkey";
     public static final String KEY_SECRET = "key_secret";
-
+    public static final String KEY_LANGUAGE = "key_language";
+    public static final String LANGUAGE = "LANGUAGE";
 
     public static final String device_sn = "device_sn";
     public static final String device_wlanmac = "device_wlanmac";

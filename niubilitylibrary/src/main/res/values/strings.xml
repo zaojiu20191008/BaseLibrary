@@ -49,5 +49,6 @@
     <string name="text_upgrade_info">升级信息</string>
     <string name="text_title">标题</string>
     <string name="text_upgrade_description">更新说明：</string>
+    <string name="text_end_program">再按一次退出程序</string>
 
 </resources>

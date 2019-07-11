@@ -20,6 +20,9 @@ public class HttpResult<T> implements IHttpResult<T>, Serializable {
     private int return_code;
     private String return_msg;
 
+    private int code;
+    private String msg;
+
     @Override
     public int code() {
         if(err_code != 0) {
@@ -28,6 +31,8 @@ public class HttpResult<T> implements IHttpResult<T>, Serializable {
             return ret;
         } else if(return_code != 0) {
             return return_code;
+        } else if (code != 0){
+            return code;
         }
         return 0;
     }
@@ -40,6 +45,8 @@ public class HttpResult<T> implements IHttpResult<T>, Serializable {
             return error_msg;
         } else if(return_msg != null) {
             return return_msg;
+        } else if (msg != null){
+            return msg;
         }
         return "";
     }
@@ -56,6 +63,6 @@ public class HttpResult<T> implements IHttpResult<T>, Serializable {
 
     @Override
     public boolean isSuccessful() {
-        return err_code == 200 || ret == 200 || return_code == 200;
+        return err_code == 200 || ret == 200 || return_code == 200 || code == 1;
     }
 }
