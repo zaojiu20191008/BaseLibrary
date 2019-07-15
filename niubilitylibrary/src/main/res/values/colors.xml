@@ -16,8 +16,10 @@
     <color name="color_D3D3D3">#D3D3D3</color>
     <color name="color_4CBBAC">#4CBBAC</color>
     <color name="color_505050">#505050</color>
+    <color name="color_309B45">#309B45</color>
 
 
     <color name="color_wechat_00B700">#00B700</color>
     <color name="color_wechat_69CA69">#69CA69</color>
+
 </resources>

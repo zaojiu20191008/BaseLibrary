@@ -1,8 +1,13 @@
 package com.niubility.library.utils;
 
+import android.content.Context;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.niubility.library.service.InstallAccessibilityService;
+
+import java.io.File;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
@@ -83,5 +88,17 @@ public class DeviceUtils {
 
 
     }
+
+
+    public static boolean checkRooted() {
+        boolean result = false;
+        try {
+            result = new File("/system/bin/su").exists() || new File("/system/xbin/su").exists();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
 }

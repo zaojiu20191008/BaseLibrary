@@ -190,6 +190,8 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
             hitTimeArray = new long[clickCount];
         }
 
+        //showLog("====================================点击了左上角");
+
         /**
          * 实现双击方法
          * src 拷贝的源数组
@@ -212,8 +214,8 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         return false;
     }
 
-    public int hitCounts = 10;//默认的持续点击次数
-    public long hitEffectiveTime = 15 * 1000;//默认的持续点击有效时间
+    public static final int hitCounts = 10;//默认的持续点击次数
+    public static final long hitEffectiveTime = 15 * 1000;//默认的持续点击有效时间
 
     /**
      * 使用默认生效次数和有效时间

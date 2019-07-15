@@ -3,6 +3,8 @@
 
     <string name="text_contentDescription_image">imageView</string>
 
+    <string name="accessibility_service_description">应用自动安装服务</string>
+
     <string name="text_login_vip">会员登录</string>
     <string name="tip_require_code_vip">请将会员码放至扫描区前</string>
     <string name="text_time_count_down">（120s）</string>
@@ -49,6 +51,7 @@
     <string name="text_upgrade_info">升级信息</string>
     <string name="text_title">标题</string>
     <string name="text_upgrade_description">更新说明：</string>
+    <string name="text_downloading">正在下载...</string>
     <string name="text_end_program">再按一次退出程序</string>
 
 </resources>

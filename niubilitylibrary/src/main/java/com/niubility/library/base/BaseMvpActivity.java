@@ -12,11 +12,14 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * MVP模式，绑定生命周期，防止内存泄漏，基类
  */
 public abstract class BaseMvpActivity<V extends BaseView, P extends BasePresenter<V>> extends BaseActivity {
+
+    private Unbinder unbinder;
 
     protected P mPresenter;
     protected V mView;
@@ -26,7 +29,7 @@ public abstract class BaseMvpActivity<V extends BaseView, P extends BasePresente
         super.onCreate(savedInstanceState);
 
         setContentView(getLayoutId());
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
 
         if(mPresenter == null)
             mPresenter = createPresenter();
@@ -46,6 +49,10 @@ public abstract class BaseMvpActivity<V extends BaseView, P extends BasePresente
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
 
         EventBus.getDefault().unregister(this);
     }

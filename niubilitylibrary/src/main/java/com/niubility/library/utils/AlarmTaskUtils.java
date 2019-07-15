@@ -10,6 +10,7 @@ import android.os.Build;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+//TODO 未完成，有错误，不能使用
 public class AlarmTaskUtils {
 
     private static final long TIME_INTERVAL = 38400 * 1000;//闹钟执行任务的时间间隔

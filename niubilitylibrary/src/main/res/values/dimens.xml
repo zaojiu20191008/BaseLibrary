@@ -7,4 +7,7 @@
     <dimen name="width_dialog_code">@dimen/x620</dimen>
     <dimen name="height_dialog_code">@dimen/y780</dimen>
 
+    <dimen name="width_dialog_input">@dimen/x620</dimen>
+    <dimen name="height_dialog_input">@dimen/x620</dimen>
+
 </resources>

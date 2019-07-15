@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x720"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:id="@+id/dialog_download_circle">
+
+
+    <com.niubility.library.widget.custom.DownloadCircleView
+        android:id="@+id/view_custom_download_circle"
+        android:layout_centerInParent="true"
+        android:layout_width="@dimen/x360"
+        android:layout_height="@dimen/x360"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/x180"
+        android:layout_height="@dimen/x180"
+        app:layout_constraintTop_toTopOf="@id/view_custom_download_circle"
+        app:layout_constraintBottom_toBottomOf="@id/view_custom_download_circle"
+        app:layout_constraintStart_toStartOf="@id/view_custom_download_circle"
+        app:layout_constraintEnd_toEndOf="@id/view_custom_download_circle"
+        android:contentDescription="@string/text_contentDescription_image" />
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y40"
+        android:layout_marginBottom="@dimen/y50"
+        android:text="@string/text_downloading"
+        android:textSize="@dimen/x36"
+        android:textColor="@color/color_238838"
+        app:layout_constraintTop_toBottomOf="@id/view_custom_download_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
