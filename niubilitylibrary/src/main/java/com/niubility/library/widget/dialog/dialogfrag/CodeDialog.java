@@ -29,7 +29,7 @@ public class CodeDialog extends BaseDialog {
     private ProgressBar pb_circle_loading;
     private TextView tv_content;
 
-
+    private String title = "微信支付";
     private String url_code;
     private String subTitle;
 
@@ -111,6 +111,8 @@ public class CodeDialog extends BaseDialog {
         pb_circle_loading.setVisibility(View.VISIBLE);
         iv_code.setVisibility(View.INVISIBLE);
 
+        tv_title.setText(title);
+
     }
 
     @Override
@@ -174,5 +176,7 @@ public class CodeDialog extends BaseDialog {
         return false;
     }
 
-
+    public void setTitle(String title){
+        this.title = title;
+    }
 }
