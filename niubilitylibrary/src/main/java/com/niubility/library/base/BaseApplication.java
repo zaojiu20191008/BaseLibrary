@@ -8,6 +8,7 @@ import com.niubility.library.common.config.BaseConfig;
 import com.niubility.library.tools.CrashHandler;
 import com.niubility.library.utils.FileUtils;
 import com.niubility.library.utils.LogUtils;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,8 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sApplication = this;
+
+        ZXingLibrary.initDisplayOpinion(this);
 
         /* 加载全局配置 */
         BaseConfig.readConfig(this);

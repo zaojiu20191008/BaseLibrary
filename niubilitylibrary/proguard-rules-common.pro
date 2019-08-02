@@ -40,7 +40,7 @@
 -dontskipnonpubliclibraryclasses #不跳过(混淆) jars中的 非public classes   默认选项
 
 -keepattributes Exceptions # 解决AGPBI警告
--keepattributes Exceptions,InnerClasses,...
+-keepattributes Exceptions,InnerClasses
 -keepattributes EnclosingMethod
 -keepattributes SourceFile,LineNumberTable #运行抛出异常时保留代码行号
 #过滤泛型
