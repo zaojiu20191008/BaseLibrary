@@ -3,6 +3,8 @@ package com.niubility.library.widget.dialog.dialogfrag;
 import android.os.Build;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +46,13 @@ public class InputDialog extends BaseDialog implements View.OnClickListener {
     private String text_tip_et;
     private String text_input;
     private String text_input_hint;
+
+
+    /**
+     * 文字显示方式，默认为0
+     * 0为明文显示，1为密文显示
+     */
+    private int displayMode = 0;
 
     @Override
     protected void initView(View rootView) {
@@ -156,6 +165,17 @@ public class InputDialog extends BaseDialog implements View.OnClickListener {
             tiet_input.setHint(text_input_hint);
         }
 
+        if (tiet_input != null) {
+            switch (displayMode) {
+                case 1://密文显示
+                    tiet_input.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    break;
+                default:
+                    tiet_input.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    break;
+            }
+        }
+
 
     }
 
@@ -242,5 +262,11 @@ public class InputDialog extends BaseDialog implements View.OnClickListener {
             tv_tip_et.setText(etTip);
         }
     }
+
+
+    public void setDisplayMode(int displayMode) {
+        this.displayMode = displayMode;
+    }
+
 
 }

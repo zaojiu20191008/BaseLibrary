@@ -41,6 +41,16 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_tips"
             app:layout_constraintStart_toEndOf="@id/tv_tips"/>
 
+    <Button
+        android:id="@+id/bt_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tips"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_tips" />
+
     <TextView
             android:id="@+id/tv_error_code"
             android:layout_width="wrap_content"

@@ -4,24 +4,32 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.niubility.library.R;
 
 public class LikeToastDialog extends Dialog {
 
+    private Button bt_close;
     private TextView tv_error_code;
     private TextView tv_error_message;
 
     private CountDownTimer countDownTimer;
 
 
+    private boolean cdEnable = true;
     private long error_code;
     private String error_message;
+
+    public void setCdEnable(boolean cdEnable) {
+        this.cdEnable = cdEnable;
+    }
 
     public void setError_code(long error_code) {
         this.error_code = error_code;
@@ -53,10 +61,20 @@ public class LikeToastDialog extends Dialog {
 
         setContentView(R.layout.dialog_like_toast);
 
+        bt_close = findViewById(R.id.bt_close);
         tv_error_code = findViewById(R.id.tv_error_code);
         tv_error_message = findViewById(R.id.tv_error_message);
 
         setCanceledOnTouchOutside(false);
+
+        bt_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (continuousClick(5, 5000)){
+                    dismiss();
+                }
+            }
+        });
 
         countDownTimer = new CountDownTimer(6 * 1000, 1000) {
             @Override
@@ -98,10 +116,11 @@ public class LikeToastDialog extends Dialog {
             @Override
             public void onFinish() {
 
-                hide();
+                dismiss();
 
             }
         };
+
 
 
     }
@@ -119,7 +138,53 @@ public class LikeToastDialog extends Dialog {
             error_message = "";
         }
 
-        countDownTimer.start();
+        if (cdEnable) {
+            countDownTimer.start();
+        }
+
+    }
+
+
+
+
+
+    /* 用于缓存记录 持续点击的每一次时间值 */
+    protected long[] hitTimeArray = null;
+
+    /**
+     * 可选函数，在设定的有效时间内，连续点击达到设定的次数才返回 true
+     * 常用于 onClick 点击事件中
+     *
+     * @param clickCount    连续点击的次数
+     * @param effectiveTime 连续点击的有效时间
+     * @return
+     */
+    public boolean continuousClick(int clickCount, long effectiveTime) {
+
+        if (hitTimeArray == null) {
+            hitTimeArray = new long[clickCount];
+        }
+
+        /**
+         * 实现双击方法
+         * src 拷贝的源数组
+         * srcPos 从源数组的那个位置开始拷贝.
+         * dst 目标数组
+         * dstPos 从目标数组的那个位子开始写数据
+         * length 拷贝的元素的个数
+         */
+        System.arraycopy(hitTimeArray, 1, hitTimeArray, 0, hitTimeArray.length - 1);
+        //实现左移，然后最后一个位置更新距离开机的时间，如果最后一个时间和最开始时间小于DURATION，即连续5次点击
+        hitTimeArray[hitTimeArray.length - 1] = SystemClock.uptimeMillis();
+        if (hitTimeArray[0] >= (SystemClock.uptimeMillis() - effectiveTime)) {
+            hitTimeArray = null;    //这里说明一下，我们在进来以后需要还原状态，否则如果点击过快，超出设定次数的后续点击，都会不断进来触发该效果。重新开始计数即可
+
+//            String tips = "您已在[" + effectiveTime + "]ms内连续点击【" + hitTimeArray.length + "】次了！！！";
+//            Toast.makeText(this, tips, Toast.LENGTH_SHORT).show();
+
+            return true;
+        }
+        return false;
     }
 
 }

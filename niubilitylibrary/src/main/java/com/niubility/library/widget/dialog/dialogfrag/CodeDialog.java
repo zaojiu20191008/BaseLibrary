@@ -14,10 +14,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.niubility.library.R;
 import com.niubility.library.base.BaseDialog;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 public class CodeDialog extends BaseDialog {
 
@@ -53,21 +55,40 @@ public class CodeDialog extends BaseDialog {
         super.onStart();
 
         if (url_code != null && !TextUtils.isEmpty(url_code)) {
-            Glide.with(getActivity()).load(url_code)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(new CustomTarget<Drawable>() {
-                        @Override
-                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                            pb_circle_loading.setVisibility(View.GONE);
-                            iv_code.setVisibility(View.VISIBLE);
-                            iv_code.setImageDrawable(resource);
-                        }
+            if (url_code.startsWith("http")){
+                Glide.with(getActivity()).load(url_code)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .into(new CustomTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                pb_circle_loading.setVisibility(View.GONE);
+                                iv_code.setVisibility(View.VISIBLE);
+                                iv_code.setImageDrawable(resource);
+                            }
 
-                        @Override
-                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
 
-                        }
-                    });
+                            }
+                        });
+            } else {
+                Glide.with(getActivity()).load(CodeUtils.createImage(url_code, 200, 200, null))
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .into(new CustomTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                pb_circle_loading.setVisibility(View.GONE);
+                                iv_code.setVisibility(View.VISIBLE);
+                                iv_code.setImageDrawable(resource);
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                            }
+                        });
+            }
+
         }
 
         if (subTitle != null) {
