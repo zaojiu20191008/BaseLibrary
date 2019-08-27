@@ -1,0 +1,38 @@
+
+{
+	"buildFiles" : [ "E:/AndroidProjects/NiubilityDemo/app/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"E:\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build E:\\AndroidProjects\\NiubilityDemo\\app\\.cxx\\cmake\\dev\\arm64-v8a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"native-lib-Debug-arm64-v8a" : 
+		{
+			"abi" : "arm64-v8a",
+			"artifactName" : "native-lib",
+			"buildCommand" : "E:\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build E:\\AndroidProjects\\NiubilityDemo\\app\\.cxx\\cmake\\dev\\arm64-v8a --target native-lib",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=aarch64-none-linux-android21 --gcc-toolchain=E:/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=E:/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnative_lib_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security  -frtti -fexceptions -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "E:/AndroidProjects/NiubilityDemo/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "E:/AndroidProjects/NiubilityDemo/app/.cxx/cmake/dev/arm64-v8a"
+				}
+			],
+			"output" : "E:/AndroidProjects/NiubilityDemo/app/build/intermediates/cmake/dev/obj/arm64-v8a/libnative-lib.so",
+			"toolchain" : "2259502793"
+		}
+	},
+	"toolchains" : 
+	{
+		"2259502793" : 
+		{
+			"cCompilerExecutable" : "E:/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "E:/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}

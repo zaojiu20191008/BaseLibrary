@@ -1,0 +1,16 @@
+{
+  "buildFiles": [
+    "E:\\AndroidProjects\\NiubilityDemo\\app\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "E:\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build E:\\AndroidProjects\\NiubilityDemo\\app\\.cxx\\cmake\\T\\x86_64 --target clean"
+  ],
+  "libraries": {
+    "native-lib-Debug-x86_64": {
+      "artifactName": "native-lib",
+      "buildCommand": "E:\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build E:\\AndroidProjects\\NiubilityDemo\\app\\.cxx\\cmake\\T\\x86_64 --target native-lib",
+      "abi": "x86_64",
+      "output": "E:\\AndroidProjects\\NiubilityDemo\\app\\build\\intermediates\\cmake\\T\\obj\\x86_64\\libnative-lib.so"
+    }
+  }
+}

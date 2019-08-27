@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,6 +30,9 @@ public class LikeToastDialog extends Dialog {
     private long error_code;
     private String error_message;
 
+    private int xLocation = 0;
+    private int yLocation = 0;
+
     public void setCdEnable(boolean cdEnable) {
         this.cdEnable = cdEnable;
     }
@@ -39,7 +45,13 @@ public class LikeToastDialog extends Dialog {
         this.error_message = error_message;
     }
 
+    public void setxLocation(int xLocation) {
+        this.xLocation = xLocation;
+    }
 
+    public void setyLocation(int yLocation) {
+        this.yLocation = yLocation;
+    }
 
     public LikeToastDialog(@NonNull Context context) {
         super(context, R.style.CustomDialogStyle);
@@ -53,6 +65,13 @@ public class LikeToastDialog extends Dialog {
         Window window = getWindow();
         window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置为居中
 
+        if (xLocation != 0 || yLocation != 0) {
+            WindowManager.LayoutParams params = window.getAttributes();
+            //params.gravity = Gravity.TOP;
+            params.x = xLocation;
+            params.y = yLocation;
+        }
+
         View decorView = window.getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE
@@ -65,8 +84,6 @@ public class LikeToastDialog extends Dialog {
         tv_error_code = findViewById(R.id.tv_error_code);
         tv_error_message = findViewById(R.id.tv_error_message);
 
-        setCanceledOnTouchOutside(false);
-
         bt_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +92,8 @@ public class LikeToastDialog extends Dialog {
                 }
             }
         });
+
+        setCanceledOnTouchOutside(false);
 
         countDownTimer = new CountDownTimer(6 * 1000, 1000) {
             @Override
@@ -143,9 +162,6 @@ public class LikeToastDialog extends Dialog {
         }
 
     }
-
-
-
 
 
     /* 用于缓存记录 持续点击的每一次时间值 */
