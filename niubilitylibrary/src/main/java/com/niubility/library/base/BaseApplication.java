@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
+import com.niubility.library.BuildConfig;
 import com.niubility.library.common.config.BaseConfig;
 import com.niubility.library.tools.CrashHandler;
 import com.niubility.library.utils.FileUtils;
@@ -15,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import leakcanary.LeakCanary;
 
 public class BaseApplication extends Application {
 

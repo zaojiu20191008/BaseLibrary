@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.CountDownTimer;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -31,19 +32,29 @@ public class CodeDialog extends BaseDialog {
     private ProgressBar pb_circle_loading;
     private TextView tv_content;
 
-    private String title = "微信支付";
-    private String url_code;
+    private int titleIconRes;
+    private String title;
     private String subTitle;
+    private String url_code;
+
 
     private CountDownTimer countDownTimer;
     private int cdDuration = 120;
 
-    public void setUrl_code(String url_code) {
-        this.url_code = url_code;
+    public void setTitleIconRes(@DrawableRes int titleIconRes) {
+        this.titleIconRes = titleIconRes;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
     }
 
     public void setSubTitle(String subTitle) {
         this.subTitle = subTitle;
+    }
+
+    public void setUrl_code(String url_code) {
+        this.url_code = url_code;
     }
 
     public void setCdDuration(int cdDuration) {
@@ -55,7 +66,7 @@ public class CodeDialog extends BaseDialog {
         super.onStart();
 
         if (url_code != null && !TextUtils.isEmpty(url_code)) {
-            if (url_code.startsWith("http")){
+            if (url_code.endsWith("jpg") || url_code.endsWith("png")){
                 Glide.with(getActivity()).load(url_code)
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                         .into(new CustomTarget<Drawable>() {
@@ -89,6 +100,14 @@ public class CodeDialog extends BaseDialog {
                         });
             }
 
+        }
+
+        if (titleIconRes != 0) {
+            iv_icon_title.setImageDrawable(getResources().getDrawable(titleIconRes));
+        }
+
+        if (title != null) {
+            tv_title.setText(title);
         }
 
         if (subTitle != null) {
@@ -131,8 +150,6 @@ public class CodeDialog extends BaseDialog {
 
         pb_circle_loading.setVisibility(View.VISIBLE);
         iv_code.setVisibility(View.INVISIBLE);
-
-        tv_title.setText(title);
 
     }
 
@@ -197,7 +214,4 @@ public class CodeDialog extends BaseDialog {
         return false;
     }
 
-    public void setTitle(String title){
-        this.title = title;
-    }
 }

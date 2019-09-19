@@ -26,6 +26,7 @@ android {
     }
 
     buildTypes {
+
         release {
             minifyEnabled true
             //Zipalign优化
@@ -66,8 +67,8 @@ dependencies {
     api 'com.android.support:design:28.0.0'
 
     //OkHttp interceptor
-    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    api 'com.squareup.okhttp3:okhttp:3.12.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.1.0'
+    api 'com.squareup.okhttp3:okhttp:3.1.2'
     //Retrofit
     api 'com.squareup.retrofit2:retrofit:2.5.0'
     api 'com.squareup.retrofit2:converter-gson:2.5.0'
@@ -89,12 +90,14 @@ dependencies {
     //EventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
     //zxing精简库
-    implementation 'cn.yipianfengye.android:zxing-library:2.2'
+    implementation ('cn.yipianfengye.android:zxing-library:2.2') {
+        exclude group: 'com.android.support'
+    }
 
     //Preference
     implementation 'com.android.support:preference-v7:28.0.0'
 
-    implementation 'org.slf4j:slf4j-android:1.7.25'
+    implementation 'org.slf4j:slf4j-android:1.7.28'
 
     api 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
@@ -102,4 +105,8 @@ dependencies {
     //    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     api 'me.jessyan:progressmanager:1.5.0'
+
+    // debugImplementation because LeakCanary should only run in debug builds.
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
+
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/x720"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_cl_choose_pay_mode">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y30"
+        android:text="@string/text_choose_pay_mode"
+        android:textColor="#333333"
+        android:textSize="@dimen/x50"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_pay_face"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple_cl_pay_face"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+
+        <ImageView
+            android:id="@+id/iv_pay_face"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/x200"
+            app:srcCompat="@drawable/icon_pay_face"
+            android:layout_marginTop="@dimen/x100"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/text_contentDescription_image"/>
+
+        <TextView
+            android:id="@+id/tv_pay_face"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_pay_face"
+            android:textColor="@color/color_009C84"
+            android:textSize="@dimen/x40"
+            android:layout_marginTop="@dimen/x50"
+            android:layout_marginBottom="@dimen/x50"
+            app:layout_constraintTop_toBottomOf="@id/iv_pay_face"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_pay_code"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x140"
+        android:background="@drawable/ripple_cl_pay_code"
+        app:layout_constraintTop_toBottomOf="@id/cl_pay_face"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_pay_code"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_marginEnd="@dimen/x20"
+            app:srcCompat="@drawable/icon_pay_code"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_pay_code"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:contentDescription="@string/text_contentDescription_image"/>
+
+        <TextView
+            android:id="@+id/tv_pay_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_pay_code"
+            android:textColor="@color/color_009C84"
+            android:textSize="@dimen/x40"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_pay_code" />
+    </android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/x100"
+        android:padding="@dimen/x30"
+        app:srcCompat="@drawable/close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/text_contentDescription_image"/>
+
+
+</android.support.constraint.ConstraintLayout>

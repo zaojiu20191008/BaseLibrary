@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:text="@string/text_error_code"
             android:textSize="@dimen/x32"
-            android:textColor="@color/color_EEEEEE"
+            android:textColor="@color/color_333333"
             android:gravity="center"
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginEnd="@dimen/x30"

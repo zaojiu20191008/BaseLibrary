@@ -15,12 +15,12 @@ public class BaseConstants {
 
     public static final String device_sn = "device_sn";
     public static final String device_wlanmac = "device_wlanmac";
+    public static final String mac_addr = "mac_addr";
+    public static final String serial_no = "serial_no";
 
-    public static final String rawdata = "rawdata";
-    public static final String face_code = "face_code";
-    public static final String openid = "openid";
-    public static final String sub_openid = "sub_openid";
-    public static final String underage_state = "underage_state";
+    public static final String asid = "asid";
+    public static final String store_name = "store_name";
+
     public static final String appid = "appid";
     public static final String mch_id = "mch_id";
     public static final String sub_appid = "sub_appid";
@@ -34,6 +34,13 @@ public class BaseConstants {
     public static final String out_trade_no = "out_trade_no";
     public static final String total_fee = "total_fee";
 
+    public static final String rawdata = "rawdata";
+    public static final String face_code = "face_code";
+    public static final String openid = "openid";
+    public static final String sub_openid = "sub_openid";
+    public static final String underage_state = "underage_state";
+
+    public static final String raw_data = "raw_data";
 
     public static final String return_code = "return_code";
     public static final String return_msg = "return_msg";

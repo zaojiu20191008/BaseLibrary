@@ -17,6 +17,9 @@
 
     <string name="text_content_input">输入内容</string>
 
+    <string name="text_choose_pay_mode">请选择支付方式</string>
+    <string name="text_pay_face">刷脸支付</string>
+    <string name="text_pay_code">扫码支付</string>
     <string name="text_pay_wechat">微信支付</string>
     <string name="text_scan_with_wechat">请使用微信扫码开门</string>
 

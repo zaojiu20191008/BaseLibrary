@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_title"
         app:layout_constraintDimensionRatio="h,1:1"
-        app:srcCompat="@drawable/image_pay_wechat" />
+        app:srcCompat="@drawable/image_pay_code" />
 
     <TextView
         android:id="@+id/tv_subtitle"

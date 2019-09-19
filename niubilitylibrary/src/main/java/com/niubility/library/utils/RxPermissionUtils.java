@@ -41,7 +41,9 @@ public class RxPermissionUtils {
     private CallbackListener listener;
 
     public interface CallbackListener {
-        void onCallback();
+        void onGrantedCallback();
+        void onRefuseCallback();
+        void onBanCallback();
     }
 
     public void setCallbackListener(CallbackListener listener) {
@@ -60,18 +62,24 @@ public class RxPermissionUtils {
                 public void accept(Permission permission) throws Exception {
                     if (permission.granted) {
                         if (listener != null && isCallback) {
-                            listener.onCallback();
+                            listener.onGrantedCallback();
                         }
                     } else if (permission.shouldShowRequestPermissionRationale) {
                         Toast.makeText(activity, "您拒绝了 " + Arrays.toString(describe) + " 权限", Toast.LENGTH_SHORT).show();
+                        if (listener != null && isCallback) {
+                            listener.onRefuseCallback();
+                        }
                     } else {
                         Toast.makeText(activity, "您已禁止开启 " + Arrays.toString(describe) + " 权限，需要您到设置手动开启", Toast.LENGTH_SHORT).show();
+                        if (listener != null && isCallback) {
+                            listener.onBanCallback();
+                        }
                     }
                 }
             });
         } else {
             if (listener != null && isCallback) {
-                listener.onCallback();
+                listener.onGrantedCallback();
             }
         }
     }

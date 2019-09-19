@@ -3,7 +3,6 @@ package com.niubility.library.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import android.util.Log;
 import com.niubility.library.mvp.BasePresenter;
 import com.niubility.library.mvp.BaseView;
 
