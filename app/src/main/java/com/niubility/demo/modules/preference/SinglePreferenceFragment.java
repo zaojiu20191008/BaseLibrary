@@ -2,7 +2,7 @@ package com.niubility.demo.modules.preference;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import com.niubility.demo.R;
 
 public class SinglePreferenceFragment extends PreferenceFragment {

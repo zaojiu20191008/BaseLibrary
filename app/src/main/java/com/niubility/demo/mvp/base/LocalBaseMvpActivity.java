@@ -1,7 +1,7 @@
 package com.niubility.demo.mvp.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.Toast;
 import com.niubility.library.base.BaseMvpActivity;
 import com.niubility.library.utils.ScreenUtils;

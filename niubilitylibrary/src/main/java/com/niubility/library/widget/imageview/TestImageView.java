@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
 
-public class TestImageView extends android.support.v7.widget.AppCompatImageView {
+public class TestImageView extends androidx.appcompat.widget.AppCompatImageView {
 
 
     public TestImageView(Context context) {

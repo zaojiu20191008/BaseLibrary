@@ -1,3 +1,0 @@
-E:/AndroidProjects/NiubilityDemo/app/.cxx/cmake/T/x86/CMakeFiles/native-lib.dir
-E:/AndroidProjects/NiubilityDemo/app/.cxx/cmake/T/x86/CMakeFiles/edit_cache.dir
-E:/AndroidProjects/NiubilityDemo/app/.cxx/cmake/T/x86/CMakeFiles/rebuild_cache.dir

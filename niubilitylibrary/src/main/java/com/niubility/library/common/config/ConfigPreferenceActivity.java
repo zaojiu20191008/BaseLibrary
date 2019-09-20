@@ -1,15 +1,11 @@
 package com.niubility.library.common.config;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.niubility.library.R;
-import com.niubility.library.base.BaseApplication;
-import com.niubility.library.base.BaseDialog;
-import com.niubility.library.utils.ToastUtils;
 
 /**
  * 配置Activity

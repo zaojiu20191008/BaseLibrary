@@ -1,7 +1,7 @@
 package com.niubility.library.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.niubility.library.mvp.BasePresenter;
 import com.niubility.library.mvp.BaseView;

@@ -1,6 +1,6 @@
 package com.niubility.library.base;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.niubility.library.mvp.BaseView;
 import com.niubility.library.utils.ToastUtils;

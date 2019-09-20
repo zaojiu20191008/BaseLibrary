@@ -1,7 +1,7 @@
 package com.niubility.library.http.base;
 
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.niubility.library.BuildConfig;
